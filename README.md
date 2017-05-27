@@ -123,3 +123,50 @@ s'est déclenché.
   
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
 solution après chaque itération du cycle principal du workflow. 
+
+#### Exercice 2
+Un des avantages des propriétés JavaFX est la possibilité de pouvoir les lier entre-elles. Ce mécanisme, appelé 
+**binding**, permet de mettre à jour automatiquement une propriété en fonction d'une autre.
+
+Dans les interfaces utilisateurs, on a fréquemment ce type de liens. Par exemple, lorsqu'on déplace le curseur d'un 
+slider, la valeur d'un champ texte changera (ou la luminosité d'une image, la taille d'un graphique, le niveau sonore, etc.).
+
+Il est possible de lier deux propriétés **A** et **B** de manière :
+- *Unidirectionnelle* : un changement de **A** entraînera un changement de **B** mais pas l'inverse (**B** non modifiable autrement).
+
+- *Bidirectionnelle* : un changement de **A** entraînera un changement de **B** et réciproquement (les deux sont modifiables).
+    
+La méthode `bind()` permet de créer un lien unidirectionnel. La méthode doit être appelée sur la propriété qui sera 
+*"soumise"* à l'autre (celle qui est passée en paramètre). Une propriété ne peut être liée (asservie) qu'à une seule 
+autre si le lien est unidirectionnel (`bind()`). Si l'on tente de modifier la valeur de la propriété associée d'une 
+autre manière, une exception sera générée. 
+
+Allez dans le paquetage `exercice2` et ouvrir la classe `PropertyExampleContinued`, puis l'implémenter en respectant les 
+consignes suivantes :
+
+- Écrire la méthode `bindAndUnbindOnePropertyToAnother()`. Cette méthode doit effectuer les actions suivantes :
+   - Déclarer une variable `otherProperty` du type `IntegerProperty` et l'instancier avec 0 comme valeur initiale.
+   
+   - Afficher la valeur de `otherProperty`
+   
+   - Soumêtre la valeur de `otherProperty` à celle de `anIntProperty`.
+   
+   - Afficher la valeur de `otherProperty`
+   
+   - Modifier la valeur de la propriété `anIntProperty`
+   
+   - Afficher la valeur de `otherProperty`
+   
+   - Délier les deux propriétés
+   
+   - Afficher la valeur de `otherProperty`
+   
+   - Modifier la valeur de la propriété `anIntProperty`
+   
+   - Afficher la valeur de `otherProperty`
+   
+  Chaque action sera tracée avec des affichages pour bien comprendre ce qui se passe.
+  
+Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+observer le comportement de la fonction `main()` à travers l'affichage sur la console.
