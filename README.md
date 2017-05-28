@@ -285,3 +285,34 @@ Comme pour les exercices précédents, vous devez activer les tests les uns apr�
 solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
 observer le comportement de votre IHM. Comme vous pourrez le voir, le calcul de la valeur de l'aire est fait 
 automatiquement à chaque fois que nécessaire.
+
+#### Exercice 5
+L'exercice précédent illustre comment les propriétés et les bindings facilitent la création d'une application ou 
+un model (une classe métier comme `TriangleArea` pour faire simple) pourra facilement être associé à une vue (une IHM).
+Nous allons aller plus loin pour montrer que ce principe peut s'appliquer en cascade. En plus de nos points soumis à des 
+sliders, nous allons dessiner le triangle en soumettant les arrêtes aux coordonnées de des points.
+
+Pour dessiner, nous allons rajouter un panneau de type `Pane` de 500 de haut par 500 de large. À l'interieur de ce 
+paneau, il y aura 3 segments (objets de la classe `Line`). Les points de départ et d'arrivé de ces segments seront liées 
+aux coordonnées de l'objet `triangleArea`.
+
+Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
+
+![](src/main/resources/assets/triangle2.png)
+
+Dans le Paquetage `exercice5`, ouvrir la classe `TriangleAreaCalculatorAndDrawer` et l'implémenter en respectant les consignes 
+suivantes :
+
+- La classe `TriangleAreaCalculatorAndDrawer` doit respecter les mêmes contraintes que la classe `TriangleAreaCalculator`.
+
+- La méthode `addDrawPane()` doit configurer la données membre `drawPane` pour qu'elle ait une taille de 500 par 500. 
+Son arrière plan sera de couleur gris clair. Les trois cotés du triangles sont à ajouter à ce panneau. Ce panneau sera 
+à ajouter dans la première colone et dernière ligne du `GridPane`.
+
+- Le méthode `createBinding()` doit en plus des bindings précédents rajouter les liens entre les coordonnées du triangle 
+et les coordonnées des 3 segments `p1p2`, `p2p3` et `p3p1`.
+
+Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+observer le comportement de votre IHM. Comme vous pourrez le voir, le calcul de la valeur de l'aire et le dessin est fait 
+automatiquement à chaque fois que nécessaire.

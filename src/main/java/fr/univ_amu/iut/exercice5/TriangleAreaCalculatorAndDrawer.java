@@ -1,4 +1,4 @@
-package fr.univ_amu.iut.exercice4;
+package fr.univ_amu.iut.exercice5;
 
 import fr.univ_amu.iut.exercice3.TriangleArea;
 import javafx.application.Application;
@@ -11,11 +11,13 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 
-public class TriangleAreaCalculator extends Application {
+public class TriangleAreaCalculatorAndDrawer extends Application {
     private TriangleArea triangleArea = new TriangleArea();
 
     private Slider x1Slider = new Slider(0, 10, 0);
@@ -37,31 +39,23 @@ public class TriangleAreaCalculator extends Application {
     private Label areaLabel = new Label("Area :");
     private TextField areaTextField = new TextField();
 
+    private Line p1p2 = new Line();
+    private Line p2p3 = new Line();
+    private Line p3p1 = new Line();
+
+    private Pane drawPane = new Pane();
+
     private GridPane root = new GridPane();
-
-    private static void configSlider(Slider slider) {
-        slider.setMin(0);
-        slider.setMax(10);
-        slider.setValue(0);
-
-        slider.setSnapToTicks(true);
-        slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
-
-        slider.setMajorTickUnit(5);
-        slider.setMinorTickCount(5);
-        slider.setBlockIncrement(1);
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
         configGridPane();
         configSliders();
-
         addSliders();
         addArea();
-
         addPointLabels();
+        addDrawPane();
+
         createBinding();
 
         Scene scene = new Scene(root);
@@ -79,13 +73,39 @@ public class TriangleAreaCalculator extends Application {
         configSlider(y3Slider);
     }
 
+    private void addDrawPane() {
+        drawPane.setPrefHeight(500);
+        drawPane.setPrefWidth(500);
+        drawPane.setStyle("-fx-background-color: #e7e7e7");
+
+        drawPane.getChildren().addAll(p1p2, p2p3, p3p1);
+
+        root.add(drawPane, 0, 11, 2, 1);
+        GridPane.setVgrow(drawPane, Priority.ALWAYS);
+    }
+
+    private void configSlider(Slider slider) {
+        slider.setMin(0);
+        slider.setMax(10);
+        slider.setValue(0);
+
+        slider.setSnapToTicks(true);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+
+        slider.setMajorTickUnit(5);
+        slider.setMinorTickCount(5);
+        slider.setBlockIncrement(1);
+    }
+
     private void configGridPane() {
         root.setPadding(new Insets(10, 10, 10, 10));
         root.setHgap(10);
         root.setVgap(20);
 
         ColumnConstraints column1 = new ColumnConstraints(50, 50, Double.MAX_VALUE);
-        ColumnConstraints column2 = new ColumnConstraints(150, 450, Double.MAX_VALUE);
+        ColumnConstraints column2 = new ColumnConstraints(450, 450, Double.MAX_VALUE);
+
         column2.setHgrow(Priority.ALWAYS);
         root.getColumnConstraints().addAll(column1, column2);
 
@@ -94,7 +114,6 @@ public class TriangleAreaCalculator extends Application {
     private void addArea() {
         root.add(areaLabel, 0, 10);
         root.add(areaTextField, 1, 10);
-        GridPane.setVgrow(areaLabel, Priority.ALWAYS);
     }
 
     private void addSliders() {
@@ -139,5 +158,23 @@ public class TriangleAreaCalculator extends Application {
         triangleArea.y3Property().bind(y3Slider.valueProperty());
 
         areaTextField.textProperty().bind(triangleArea.areaProperty().asString());
+
+        p1p2.startXProperty().bind(triangleArea.x1Property().multiply(50));
+        p1p2.startYProperty().bind(triangleArea.y1Property().multiply(50));
+
+        p1p2.endXProperty().bind(triangleArea.x2Property().multiply(50));
+        p1p2.endYProperty().bind(triangleArea.y2Property().multiply(50));
+
+        p2p3.startXProperty().bind(triangleArea.x2Property().multiply(50));
+        p2p3.startYProperty().bind(triangleArea.y2Property().multiply(50));
+
+        p2p3.endXProperty().bind(triangleArea.x3Property().multiply(50));
+        p2p3.endYProperty().bind(triangleArea.y3Property().multiply(50));
+
+        p3p1.startXProperty().bind(triangleArea.x3Property().multiply(50));
+        p3p1.startYProperty().bind(triangleArea.y3Property().multiply(50));
+
+        p3p1.endXProperty().bind(triangleArea.x1Property().multiply(50));
+        p3p1.endYProperty().bind(triangleArea.y1Property().multiply(50));
     }
 }
