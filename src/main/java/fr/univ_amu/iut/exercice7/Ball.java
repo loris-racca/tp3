@@ -13,11 +13,12 @@ public class Ball {
 
     private final DoubleProperty positionX;
     private final DoubleProperty positionY;
-    private final DoubleProperty velocityX;
-    private final DoubleProperty velocityY;
+    private final DoubleProperty velocityX;//en pixel par nanosecond
+    private final DoubleProperty velocityY;//en pixel par nanosecond
     private final DoubleProperty radius;
     private final Pane parent;
     private Circle ball;
+
     private BooleanExpression isBouncingOffVerticalWall;
     private BooleanExpression isBouncingOffHorizontalWall;
 
@@ -26,10 +27,13 @@ public class Ball {
 
     public Ball(Pane parent) {
         this.parent = parent;
-        positionX = new SimpleDoubleProperty(50);
+
+        positionX = new SimpleDoubleProperty(20);
         positionY = new SimpleDoubleProperty(20);
-        velocityX = new SimpleDoubleProperty(150E-9);//en pixel par nanosecond
-        velocityY = new SimpleDoubleProperty(100E-9);//en pixel par nanosecond
+
+        velocityX = new SimpleDoubleProperty(150E-9);
+        velocityY = new SimpleDoubleProperty(100E-9);
+
         radius = new SimpleDoubleProperty(10);
         ball = new Circle();
 
@@ -38,7 +42,6 @@ public class Ball {
     }
 
     private void createBindings() {
-
         ball.radiusProperty().bind(radius);
 
         ball.centerXProperty().bind(positionX);
@@ -51,21 +54,11 @@ public class Ball {
         bounceOffHorizontalWall = when(isBouncingOffHorizontalWall).then(velocityY.negate()).otherwise(velocityY);
     }
 
-
-    // move
     public void move(long elapsedTimeInNanoseconds) {
         velocityX.set(bounceOffVerticalWall.doubleValue());
         velocityY.set(bounceOffHorizontalWall.doubleValue());
 
         positionX.set(positionX.get() + velocityX.get() * elapsedTimeInNanoseconds);
         positionY.set(positionY.get() + velocityY.get() * elapsedTimeInNanoseconds);
-    }
-
-    private boolean isBouncingOffVerticalWall() {
-        return isBouncingOffVerticalWall.get();
-    }
-
-    private boolean isBouncingOffHorizontalWall() {
-        return isBouncingOffHorizontalWall.get();
     }
 }
