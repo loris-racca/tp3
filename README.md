@@ -309,10 +309,38 @@ suivantes :
 Son arrière plan sera de couleur gris clair. Les trois cotés du triangles sont à ajouter à ce panneau. Ce panneau sera 
 à ajouter dans la première colonne et dernière ligne du `GridPane`.
 
-- Le méthode `createBinding()` doit en plus des bindings précédents rajouter les liens entre les coordonnées du triangle 
+- Le méthode `createBinding()` qui doit, en plus des bindings de l'exercice précédents, rajouter les liens entre les coordonnées du triangle 
 et les coordonnées des 3 segments `p1p2`, `p2p3` et `p3p1`.
 
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
 solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
 observer le comportement de votre IHM. Comme vous pourrez le voir, le calcul de la valeur de l'aire et le dessin est fait 
 automatiquement à chaque fois que nécessaire.
+
+#### Exercice 6
+
+Si la liaison doit se faire dans les deux sens on parle de Binding bidirectionnel. Une liaison bidirectionnelle s'effectue 
+de manière similaire, mais en utilisant la méthode `bindBidirectional()`. Une propriété ne peut être liée (asservie) 
+qu'à une seule autre si le lien est unidirectionnel (`bind()`). Par contre, les liens bidirectionnels (`bindBidirectional()`) 
+peuvent être multiples.
+
+Dans cet exercice, on va synchroniser la taille d'un cercle à la valeur d'un slider et celle d'un champ de texte. 
+Quand l'utilisateur modifiera la valeur du slider, le rayon du cercle sera modifié ainsi que l'affichage du champ 
+de texte. De même quand la valeur écrite dans le champ de texte sera modifiée, le slider et le cercle se modifieront.
+
+Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
+
+![](src/main/resources/assets/cercle.png)
+
+Dans le Paquetage `exercice6`, ouvrir la classe `BidiBindingCircle` et implémenter la méthode `createBindings()` en 
+respectant les consignes suivantes :
+
+- Les coordonnées du centre du cercle doivent être liées au centre du panneau `pane`.
+  
+- Le rayon du cercle doit être synchronisé avec la valeur du slider.
+
+- Le texte du `textField` doit aussi être synchronisé avec le rayon du cercle. Le type des deux propriétés étant 
+différent, une conversion doit être effectuée en passant un objet `NumberStringConverter` comme troisième paramettre de 
+la méthode statique `Bindings.bindBidirectional()`.
+
+- Le rayon doit être initialisé à 150.
