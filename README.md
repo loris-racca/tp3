@@ -208,7 +208,7 @@ consignes suivantes :
 - En utilisant uniquement la classe `Bindings`, soumettez la propriété `area` aux propriétés `x1`,`x2`,`x3`,`y1`,`y2`,`y3` 
 représentants les coordonnées des trois sommets d'un triangle.
 
-- La formule à utiliser est celle dite du déterminant : *(x1\*y2 - x1\*y3 + x2\*y3 - x2\*y1 + x3\*y1 - x3\*y2)/2*
+- La formule à utiliser est celle dite du déterminant : *|(x1\*y2 - x1\*y3 + x2\*y3 - x2\*y1 + x3\*y1 - x3\*y2)|/2*
 
 - Pour chacune des parties du calcul, vous utiliserez un object du type `NumberBinding`.
 
@@ -229,3 +229,59 @@ l'aire à une propriété de type `StringExpression` appelée `output`. Rajouter
 Dans cette seconde variante, on vous demande d'utiliser un *low-level binding* pour réaliser ce calcul. Il est possible 
 de définir une liaison de plus bas niveau en redéfinissant la méthode abstraite `computeValue()` d'une des classes de 
 binding (`DoubleBinding`, `BooleanBinding`, `StringBinding`, …).
+
+#### Exercice 4
+Comme on vient de le voir, les bindings permettent de lier des propriétés entre elles avec des relations plus ou moins 
+complexes. Ces liens peuvent comme on vient de le voir pertinent pour propager des calculs entre propriétés d'un même 
+objet mais ce n'est pas leur intéret majeur. 
+
+En effet, c'est quand l'on commence à lier des propriétés venant d'objets différents que ce mécanisme donne tout son 
+potentiel. Tout d'abord par sa simplicité de mise en oeuvre et surtout par le fait que ces liens peuvent être définits 
+depuis l'exterieur des classes liées. Cela offre donc une grande facilité de création tout en concervant un couplage 
+faible entre les classes.
+
+Dans cet exercice, nous allons montrer comment nous allons lier notre calculateur d'aire d'un triangle à des composants 
+graphiques. Chaque coordonnée des trois sommets du triangles sera controlée par un objet `Slider`. Pour ce faire 
+nous asservirons la coordonnée à la propriété `value` du slider. Un champ de texte sera soumis à la propriété `area` de 
+l'objet `triangleArea`.
+
+Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
+
+![](src/main/resources/assets/triangle.png)
+
+La racine de notre graphe de scène sera un objet de la classe `GridPane`. Le conteneur `GridPane` permet de disposer les 
+composants enfants dans une grille flexible (arrangement en lignes et en colonnes), un peu à la manière d'une table HTML.
+
+La grille peut être irrégulière, la hauteur des lignes et la largeur des colonnes de la grille ne sont pas nécessairement 
+uniformes. La zone occupée par un composant peut s'étendre (span) sur plusieurs lignes et/ou sur plusieurs colonnes.
+
+Le nombre de lignes et de colonnes de la grille est déterminé automatiquement par les endroits où sont placés les composants.
+Par défaut, la hauteur (respectivement la largeur) de chaque ligne (resp. colone) est déterminée par la hauteur 
+(resp. largeur) préférée du composant le plus haut (resp. large) qui s'y trouve.
+
+Dans le Paquetage `exercice4`, ouvrir la classe `TriangleAreaCalculator` et l'implémenter en respectant les consignes 
+suivantes :
+
+- Écrire la méthode `configSlider()` qui prend un objet `Slider` en paramêtre et le personnalise. Le slider doit avoir
+des valeurs allant de 0 à 10. Les marques de d'unité et leurs labels doivent être affichés. Il devra y avoir 5 marques 
+de graduation. L'incrément sera de 1 pour conserver des coordonnées entières.
+
+- Écrire la méthode `configGridPane()` qui personnalise l'objet `GridPane` qui sera utilisé comme racine du graphe de 
+scène. Le pading doit être initialité à la valeur 10 dans les quatres directions. L'espacement vertical et horizontal 
+sera aussi configuré à la même valeur. La premiere colone doit être contrainte `ColumnConstraint` avec une taille 
+préférée de 50 et une taille minimale de 50. La seconde colone, aura une contrainte qui spécifiera que la colone aura 
+sa largeur aura une largeur qui s'adaptera en fonction de la largeur de la scène.
+
+- Écrire la méthode `addSliders()` qui ajoute tous les sliders dans la bonne ligne de la grille. Chaque slider aura un 
+label qui permettra à l'utilisateur de savoir sur quelle propriété il agit. Il faudra donc rajouter les labels dans la 
+première colone.
+ 
+- Écrire la méthode `addArea()` qui ajoutera le champ de texte et son label pour afficher la valeur de l'aire.
+
+- Écrire la méthode `createBinding()` qui soumet chaque coordonnées au slider associé. Le champ de texte d'affichage 
+de l'aire sera soumis à la valeur de la propriété `area` de la donnée membre `triangleArea`.
+
+Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+observer le comportement de votre IHM. Comme vous pourrez le voir, le calcul de la valeur de l'aire est fait 
+automatiquement à chaque fois que nécessaire.

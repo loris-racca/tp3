@@ -1,12 +1,13 @@
 package fr.univ_amu.iut.exercice3;
 
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+
+import static javafx.beans.binding.Bindings.*;
 
 public class TriangleArea {
 
@@ -146,20 +147,22 @@ public class TriangleArea {
     }
 
     private void createBinding() {
-        final NumberBinding x1y2 = Bindings.multiply(x1, y2);
-        final NumberBinding x2y3 = Bindings.multiply(x2, y3);
-        final NumberBinding x3y1 = Bindings.multiply(x3, y1);
-        final NumberBinding x1y3 = Bindings.multiply(x1, y3);
-        final NumberBinding x2y1 = Bindings.multiply(x2, y1);
-        final NumberBinding x3y2 = Bindings.multiply(x3, y2);
+        final NumberBinding x1y2 = multiply(x1, y2);
+        final NumberBinding x2y3 = multiply(x2, y3);
+        final NumberBinding x3y1 = multiply(x3, y1);
+        final NumberBinding x1y3 = multiply(x1, y3);
+        final NumberBinding x2y1 = multiply(x2, y1);
+        final NumberBinding x3y2 = multiply(x3, y2);
 
-        final NumberBinding sum1 = Bindings.add(x1y2, x2y3);
-        final NumberBinding sum2 = Bindings.add(sum1, x3y1);
-        final NumberBinding sum3 = Bindings.add(sum2, x3y1);
-        final NumberBinding diff1 = Bindings.subtract(sum3, x1y3);
-        final NumberBinding diff2 = Bindings.subtract(diff1, x2y1);
-        final NumberBinding determinant = Bindings.subtract(diff2, x3y2);
-        NumberBinding areaBinding = Bindings.divide(determinant, 2.0D);
-        area.bind(areaBinding);
+        final NumberBinding sum1 = add(x1y2, x2y3);
+        final NumberBinding sum2 = add(sum1, x3y1);
+        final NumberBinding sum3 = add(sum2, x3y1);
+        final NumberBinding diff1 = subtract(sum3, x1y3);
+        final NumberBinding diff2 = subtract(diff1, x2y1);
+        final NumberBinding determinant = subtract(diff2, x3y2);
+
+        NumberBinding areaBinding = divide(determinant, 2.0D);
+
+        area.bind(when(greaterThan(0, areaBinding)).then(negate(areaBinding)).otherwise(areaBinding));
     }
 }

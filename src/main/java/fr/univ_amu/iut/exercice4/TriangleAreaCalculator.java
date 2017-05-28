@@ -22,9 +22,9 @@ public class TriangleAreaCalculator extends Application {
     private Slider x2Slider = new Slider(0, 10, 0);
     private Slider x3Slider = new Slider(0, 10, 0);
 
-    private Slider y1Slider = new Slider(0, 10, 0);
-    private Slider y2Slider = new Slider(0, 10, 0);
-    private Slider y3Slider = new Slider(0, 10, 0);
+    private Slider y1Slider = new Slider();
+    private Slider y2Slider = new Slider();
+    private Slider y3Slider = new Slider();
 
     private Label x1Label = new Label("X1 :");
     private Label x2Label = new Label("X2 :");
@@ -40,8 +40,14 @@ public class TriangleAreaCalculator extends Application {
     private GridPane root = new GridPane();
 
     private static void configSlider(Slider slider) {
+        slider.setMin(0);
+        slider.setMax(10);
+        slider.setValue(0);
+
+        slider.setSnapToTicks(true);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
+
         slider.setMajorTickUnit(5);
         slider.setMinorTickCount(5);
         slider.setBlockIncrement(1);
@@ -59,6 +65,8 @@ public class TriangleAreaCalculator extends Application {
         configSlider(y3Slider);
 
         addSliders();
+        addArea();
+
         addPointLabels();
         createBinding();
 
@@ -66,6 +74,24 @@ public class TriangleAreaCalculator extends Application {
         stage.setScene(scene);
         stage.setTitle("Triangle Area Calculator");
         stage.show();
+    }
+
+    private void configGridPane() {
+        root.setPadding(new Insets(10, 10, 10, 10));
+        root.setHgap(10);
+        root.setVgap(20);
+
+        ColumnConstraints column1 = new ColumnConstraints(50, 50, Double.MAX_VALUE);
+        ColumnConstraints column2 = new ColumnConstraints(150, 150, Double.MAX_VALUE);
+        column2.setHgrow(Priority.ALWAYS);
+        root.getColumnConstraints().addAll(column1, column2);
+
+    }
+
+    private void addArea() {
+        root.add(areaLabel, 0, 10);
+        root.add(areaTextField, 1, 10);
+        GridPane.setVgrow(areaLabel, Priority.ALWAYS);
     }
 
     private void addSliders() {
@@ -86,20 +112,6 @@ public class TriangleAreaCalculator extends Application {
 
         root.add(y3Label, 0, 8);
         root.add(y3Slider, 1, 8);
-
-        root.add(areaLabel, 0, 10);
-        root.add(areaTextField, 1, 10);
-    }
-
-    private void configGridPane() {
-        root.setPadding(new Insets(10, 10, 10, 10));
-        root.setHgap(10);
-        root.setVgap(10);
-
-        ColumnConstraints column1 = new ColumnConstraints(50, 50, Double.MAX_VALUE);
-        ColumnConstraints column2 = new ColumnConstraints(150, 150, Double.MAX_VALUE);
-        column2.setHgrow(Priority.ALWAYS);
-        root.getColumnConstraints().addAll(column1, column2);
     }
 
     private void addPointLabels() {
