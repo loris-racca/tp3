@@ -3,7 +3,9 @@ package fr.univ_amu.iut.exercice3;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class TriangleArea {
@@ -17,7 +19,7 @@ public class TriangleArea {
     private IntegerProperty x3 = new SimpleIntegerProperty(0);
     private IntegerProperty y3 = new SimpleIntegerProperty(0);
 
-    private NumberBinding area;
+    private DoubleProperty area = new SimpleDoubleProperty(0);
 
     public TriangleArea() {
         createBinding();
@@ -56,8 +58,84 @@ public class TriangleArea {
         this.y3.set(y3);
     }
 
+    public int getX1() {
+        return x1.get();
+    }
+
+    public void setX1(int x1) {
+        this.x1.set(x1);
+    }
+
+    public IntegerProperty x1Property() {
+        return x1;
+    }
+
+    public int getY1() {
+        return y1.get();
+    }
+
+    public void setY1(int y1) {
+        this.y1.set(y1);
+    }
+
+    public IntegerProperty y1Property() {
+        return y1;
+    }
+
+    public int getX2() {
+        return x2.get();
+    }
+
+    public void setX2(int x2) {
+        this.x2.set(x2);
+    }
+
+    public IntegerProperty x2Property() {
+        return x2;
+    }
+
+    public int getY2() {
+        return y2.get();
+    }
+
+    public void setY2(int y2) {
+        this.y2.set(y2);
+    }
+
+    public IntegerProperty y2Property() {
+        return y2;
+    }
+
+    public int getX3() {
+        return x3.get();
+    }
+
+    public void setX3(int x3) {
+        this.x3.set(x3);
+    }
+
+    public IntegerProperty x3Property() {
+        return x3;
+    }
+
+    public int getY3() {
+        return y3.get();
+    }
+
+    public void setY3(int y3) {
+        this.y3.set(y3);
+    }
+
+    public IntegerProperty y3Property() {
+        return y3;
+    }
+
     public double getArea() {
-        return area.getValue().doubleValue();
+        return area.getValue();
+    }
+
+    public DoubleProperty areaProperty() {
+        return area;
     }
 
     void printResult() {
@@ -81,7 +159,7 @@ public class TriangleArea {
         final NumberBinding diff1 = Bindings.subtract(sum3, x1y3);
         final NumberBinding diff2 = Bindings.subtract(diff1, x2y1);
         final NumberBinding determinant = Bindings.subtract(diff2, x3y2);
-
-        area = Bindings.divide(determinant, 2.0D);
+        NumberBinding areaBinding = Bindings.divide(determinant, 2.0D);
+        area.bind(areaBinding);
     }
 }
