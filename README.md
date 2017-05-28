@@ -49,7 +49,7 @@ Intérêt des propriétés :
 
 - Elles peuvent être liées entre-elles (Binding), c.-à-d. que le changement d'une propriété entraîne automatiquement la mise à jour d'une autre.
 
-Pour simplifier la vie du développeur, la plateforme Java offreoffre des classes permettant de créer de telles propriétés 
+Pour simplifier la vie du développeur, la plateforme Java offre des classes permettant de créer de telles propriétés 
 facilement pour les types les plus courants (des types primitifs, les chaînes de caractères, certaines collections ainsi 
 que le type `Object` qui peut couvrir tous les autres types) :
 
@@ -149,7 +149,7 @@ consignes suivantes :
    
    - Afficher la valeur de `otherProperty`
    
-   - Soumêtre la valeur de `otherProperty` à celle de `anIntProperty`.
+   - Soumettre la valeur de `otherProperty` à celle de `anIntProperty`.
    
    - Afficher la valeur de `otherProperty`
    
@@ -168,7 +168,7 @@ consignes suivantes :
   Chaque action sera tracée avec des affichages pour bien comprendre ce qui se passe.
   
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
-solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
 observer le comportement de la fonction `main()` à travers l'affichage sur la console.
 
 #### Exercice 3
@@ -213,7 +213,7 @@ représentants les coordonnées des trois sommets d'un triangle.
 - Pour chacune des parties du calcul, vous utiliserez un object du type `NumberBinding`.
 
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
-solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
 observer le comportement de la fonction `main()` à travers l'affichage sur la console. Comme vous pourrez le voir, le 
 calcul de la valeur de l'aire est fait automatiquement à chaque fois que nécessaire.
 
@@ -233,15 +233,15 @@ binding (`DoubleBinding`, `BooleanBinding`, `StringBinding`, …).
 #### Exercice 4
 Comme on vient de le voir, les bindings permettent de lier des propriétés entre elles avec des relations plus ou moins 
 complexes. Ces liens peuvent comme on vient de le voir pertinent pour propager des calculs entre propriétés d'un même 
-objet mais ce n'est pas leur intéret majeur. 
+objet mais ce n'est pas leur intérêt majeur. 
 
 En effet, c'est quand l'on commence à lier des propriétés venant d'objets différents que ce mécanisme donne tout son 
-potentiel. Tout d'abord par sa simplicité de mise en oeuvre et surtout par le fait que ces liens peuvent être définits 
-depuis l'exterieur des classes liées. Cela offre donc une grande facilité de création tout en concervant un couplage 
+potentiel. Tout d'abord par sa simplicité de mise en œuvre et surtout par le fait que ces liens peuvent être définis 
+depuis l’extérieur des classes liées. Cela offre donc une grande facilité de création tout en conservant un couplage 
 faible entre les classes.
 
 Dans cet exercice, nous allons montrer comment nous allons lier notre calculateur d'aire d'un triangle à des composants 
-graphiques. Chaque coordonnée des trois sommets du triangles sera controlée par un objet `Slider`. Pour ce faire 
+graphiques. Chaque coordonnée des trois sommets du triangles sera contrôlée par un objet `Slider`. Pour ce faire 
 nous asservirons la coordonnée à la propriété `value` du slider. Un champ de texte sera soumis à la propriété `area` de 
 l'objet `triangleArea`.
 
@@ -256,25 +256,25 @@ La grille peut être irrégulière, la hauteur des lignes et la largeur des colo
 uniformes. La zone occupée par un composant peut s'étendre (span) sur plusieurs lignes et/ou sur plusieurs colonnes.
 
 Le nombre de lignes et de colonnes de la grille est déterminé automatiquement par les endroits où sont placés les composants.
-Par défaut, la hauteur (respectivement la largeur) de chaque ligne (resp. colone) est déterminée par la hauteur 
+Par défaut, la hauteur (respectivement la largeur) de chaque ligne (resp. colonne) est déterminée par la hauteur 
 (resp. largeur) préférée du composant le plus haut (resp. large) qui s'y trouve.
 
 Dans le Paquetage `exercice4`, ouvrir la classe `TriangleAreaCalculator` et l'implémenter en respectant les consignes 
 suivantes :
 
-- Écrire la méthode `configSlider()` qui prend un objet `Slider` en paramêtre et le personnalise. Le slider doit avoir
+- Écrire la méthode `configSlider()` qui prend un objet `Slider` en paramètre et le personnalise. Le slider doit avoir
 des valeurs allant de 0 à 10. Les marques de d'unité et leurs labels doivent être affichés. Il devra y avoir 5 marques 
 de graduation. L'incrément sera de 1 pour conserver des coordonnées entières.
 
 - Écrire la méthode `configGridPane()` qui personnalise l'objet `GridPane` qui sera utilisé comme racine du graphe de 
-scène. Le pading doit être initialité à la valeur 10 dans les quatres directions. L'espacement vertical et horizontal 
-sera aussi configuré à la même valeur. La premiere colone doit être contrainte `ColumnConstraint` avec une taille 
-préférée de 50 et une taille minimale de 50. La seconde colone, aura une contrainte qui spécifiera que la colone aura 
+scène. Le pading doit être initialisé à la valeur 10 dans les quatre directions. L'espacement vertical et horizontal 
+sera aussi configuré à la même valeur. La première colonne doit être contrainte `ColumnConstraint` avec une taille 
+préférée de 50 et une taille minimale de 50. La seconde colonne, aura une contrainte qui spécifiera que la colonne aura 
 sa largeur aura une largeur qui s'adaptera en fonction de la largeur de la scène.
 
 - Écrire la méthode `addSliders()` qui ajoute tous les sliders dans la bonne ligne de la grille. Chaque slider aura un 
 label qui permettra à l'utilisateur de savoir sur quelle propriété il agit. Il faudra donc rajouter les labels dans la 
-première colone.
+première colonne.
  
 - Écrire la méthode `addArea()` qui ajoutera le champ de texte et son label pour afficher la valeur de l'aire.
 
@@ -282,18 +282,18 @@ première colone.
 de l'aire sera soumis à la valeur de la propriété `area` de la donnée membre `triangleArea`.
 
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
-solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
 observer le comportement de votre IHM. Comme vous pourrez le voir, le calcul de la valeur de l'aire est fait 
 automatiquement à chaque fois que nécessaire.
 
 #### Exercice 5
 L'exercice précédent illustre comment les propriétés et les bindings facilitent la création d'une application ou 
-un model (une classe métier comme `TriangleArea` pour faire simple) pourra facilement être associé à une vue (une IHM).
+un modèle (une classe métier comme `TriangleArea` pour faire simple) pourra facilement être associé à une vue (une IHM).
 Nous allons aller plus loin pour montrer que ce principe peut s'appliquer en cascade. En plus de nos points soumis à des 
 sliders, nous allons dessiner le triangle en soumettant les arrêtes aux coordonnées de des points.
 
-Pour dessiner, nous allons rajouter un panneau de type `Pane` de 500 de haut par 500 de large. À l'interieur de ce 
-paneau, il y aura 3 segments (objets de la classe `Line`). Les points de départ et d'arrivé de ces segments seront liées 
+Pour dessiner, nous allons rajouter un panneau de type `Pane` de 500 de haut par 500 de large. À l’intérieur de ce 
+panneau, il y aura 3 segments (objets de la classe `Line`). Les points de départ et d'arrivé de ces segments seront liées 
 aux coordonnées de l'objet `triangleArea`.
 
 Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
@@ -307,12 +307,12 @@ suivantes :
 
 - La méthode `addDrawPane()` doit configurer la données membre `drawPane` pour qu'elle ait une taille de 500 par 500. 
 Son arrière plan sera de couleur gris clair. Les trois cotés du triangles sont à ajouter à ce panneau. Ce panneau sera 
-à ajouter dans la première colone et dernière ligne du `GridPane`.
+à ajouter dans la première colonne et dernière ligne du `GridPane`.
 
 - Le méthode `createBinding()` doit en plus des bindings précédents rajouter les liens entre les coordonnées du triangle 
 et les coordonnées des 3 segments `p1p2`, `p2p3` et `p3p1`.
 
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
-solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
 observer le comportement de votre IHM. Comme vous pourrez le voir, le calcul de la valeur de l'aire et le dessin est fait 
 automatiquement à chaque fois que nécessaire.
