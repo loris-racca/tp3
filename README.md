@@ -31,7 +31,7 @@ Vous apparaîtrez automatiquement comme contributeur de ce projet pour y pousser
 Une fois votre fork créé, il vous suffit de l'importer dans IntelliJ.
 
 
-### Première étape : découvertes des propriétés
+### Première étape : découvertes des propriétés et des bindings
 
 #### Exercice 1
 
@@ -170,3 +170,62 @@ consignes suivantes :
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
 solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
 observer le comportement de la fonction `main()` à travers l'affichage sur la console.
+
+#### Exercice 3
+Parfois, une propriété dépend d'une autre mais avec une relation plus complexe. Il est ainsi possible de créer des 
+**propriétés calculées**.
+
+Deux techniques (dites de "haut-niveau") sont à disposition (elles peuvent être combinées) :
+
+   - Utiliser la classe utilitaire `Bindings` qui possède de nombreuses méthodes statiques permettant d'effectuer des 
+   opérations.
+
+   - Utiliser les méthodes disponibles dans les classes qui représentent les propriétés; ces méthodes peuvent être 
+   chaînées (Fluent API).
+
+Des opérations de conversions sont parfois nécessaires si le type des propriétés à lier n'est pas le même. Par exemple 
+pour lier un champ texte (`StringProperty`) à un slider dont la valeur est numérique (`DoubleProperty`). 
+
+Un jeu d'opérations est disponible aussi bien avec la classe `Bindings` qu'avec les méthodes chaînables :
+- `min()`, `max()`
+
+- `equal()`, `notEqual()`, `lessThan()`, `lessThanOrEqual()`, …
+
+- `isNull()`, `isNotNull()`, `isEmpty()`, `isNotEmpty()`, …
+
+- `convert()`, `concat()`, `format()`, …
+
+- `valueAt()`, `size()`, …
+
+- `when(cond).then(val1).otherwise(val2)` 
+
+- et beaucoup d'autres que l'on peut découvrir en parcourant la JavaDoc de la classe 
+[`Bindings`](https://docs.oracle.com/javase/8/javafx/api/javafx/beans/binding/Bindings.html).
+
+Allez dans le paquetage `exercice3` et ouvrir la classe `TriangleArea`, puis implémenter la méthode `createBinding()` en respectant les 
+consignes suivantes :
+
+- En utilisant uniquement la classe `Bindings`, soumettez la propriété `area` aux propriétés `x1`,`x2`,`x3`,`y1`,`y2`,`y3` 
+représentants les coordonnées des trois sommets d'un triangle.
+
+- La formule à utiliser est celle dite du déterminant : *(x1\*y2 - x1\*y3 + x2\*y3 - x2\*y1 + x3\*y1 - x3\*y2)/2*
+
+- Pour chacune des parties du calcul, vous utiliserez un object du type `NumberBinding`.
+
+Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
+solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prennez du temps pour 
+observer le comportement de la fonction `main()` à travers l'affichage sur la console. Comme vous pourrez le voir, le 
+calcul de la valeur de l'aire est fait automatiquement à chaque fois que nécessaire.
+
+#### Exercice 3 : Variante 1
+Dans cette variante, on vous demande de réaliser la même application mais en utilisant la Fluent API au lieu de la 
+classe `Bindings`.
+
+L'affichage de la méthode `printResult()` utilise maintenant lui aussi un binding qui va lier les six coordonnées et 
+l'aire à une propriété de type `StringExpression` appelée `output`. Rajouter la création de ce binding dans la méthode
+`createBinding()`
+
+#### Exercice 3 : Variante 2 
+Dans cette seconde variante, on vous demande d'utiliser un *low-level binding* pour réaliser ce calcul. Il est possible 
+de définir une liaison de plus bas niveau en redéfinissant la méthode abstraite `computeValue()` d'une des classes de 
+binding (`DoubleBinding`, `BooleanBinding`, `StringBinding`, …).
