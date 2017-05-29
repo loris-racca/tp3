@@ -420,3 +420,37 @@ en fonction de la position courante de la souris en prenant en compte la positio
 
 - Soumettre la propriété `translateY` au valeurs de `paddleY` pour déplacer correctement le rectangle de la raquette 
 pendant que l'utilisateur la drag-and-drop.
+
+Ouvrir maintenant la classe `Ball` et l'implémenter en respectant les consignes suivantes :
+
+- Dans le constructeur, configurer la balle pour qu'elle soit placée au point de coordonnées (250, 250). Régler le rayon 
+à 10 et remplir avec du violet. Initialiser les propriétés avec des valeurs adaptées du vecteur vitesse.
+
+- Écrire la méthode `collided` qui vérifie si la forme passée en argument touche la balle. Pour réaliser cette action, 
+vous pouvez utiliser l'une des méthodes `intersect()` de la classe `Shape`. 
+
+Ouvrir maintenant la classe `SlowPong`  et l'implémenter en respectant les consignes suivantes :
+- Écrire la méthode `configureStage()` qui s'occupe de créer la scène, la dimensionne à 500 par 500, associe à l'objet 
+`stage` et personnalise le titre.
+
+- Écrire la méthode `createPongPane()` qui va créer un objet `Pane` y placer les deux raquettes, la balle et le boutton *start*.
+
+- Écrire la méthode `createStartButton` qui va créer un objet `Button` avec le texte "Start!". Rajouter un écouteur pour 
+que lorsque le bouton est actionné, l'animation soit lancée. Asservir la propriété `visible` à la propriété `startVisible. 
+
+- Écrire la méthode `createBindings()` qui initialise les expressions booléennes `isBouncingOffVerticalWall` et 
+`isBouncingOffHorizontalWall`. Asservir la position en X de la raquette droite pour quelle soit toujours aussi proche du 
+bord même quand la fenêtre est agrandie. Asservir de même la position du bouton start pour qu'il soit toujours en bas et 
+au milieu de la zone de jeu.
+ 
+- Écrire les méthodes `isBouncingOffPaddles()`, `isBouncingOffLeftPaddle()`, `isBouncingOffRightPaddle()`, 
+`isBouncingOffVerticalWall()` et `isBouncingOffHorizontalWall()` qui retourne un booléen qui indique la situation de 
+rebond dans laquelle se trouve la balle.
+  
+- Écrire la méthodes `checkBouncing()` qui utilise les méthodes précédentes pour implémenter la logique de jeu. Si la 
+balle frappe contre une raquette elle rebondie horizontallement, si elle tape un mur horizontal, c'est un changement en 
+Y qui sera effectué et si elle frappe un mur vertical, la partie recommence.
+
+- Écrire la méthodes `moveBall()` qui recalcule les coordonnées de la balle en fonction de la vitesse et du temps écoulé.
+
+- Écrire la méthodes `startNewGame` qui stoppe l'animation et replace la balle au centre.

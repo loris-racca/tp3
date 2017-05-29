@@ -7,10 +7,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class SlowPong extends Application {
@@ -25,26 +23,6 @@ public class SlowPong extends Application {
 
     private BooleanExpression isBouncingOffVerticalWall;
     private BooleanExpression isBouncingOffHorizontalWall;
-
-    private boolean isBouncingOffPaddles() {
-        return isBouncingOffLeftPaddle() || isBouncingOffRightPaddle();
-    }
-
-    private boolean isBouncingOffLeftPaddle() {
-        return ball.collided(leftPaddle);
-    }
-
-    private boolean isBouncingOffRightPaddle() {
-        return ball.collided(rightPaddle);
-    }
-
-    private boolean isBouncingOffVerticalWall() {
-        return isBouncingOffVerticalWall.get();
-    }
-
-    private boolean isBouncingOffHorizontalWall() {
-        return isBouncingOffHorizontalWall.get();
-    }
 
     @Override
     public void start(Stage stage) {
@@ -63,40 +41,57 @@ public class SlowPong extends Application {
         createBindings();
     }
 
-    private void createBindings() {
-        isBouncingOffVerticalWall = ball.centerXProperty().greaterThanOrEqualTo(pongPane.widthProperty().subtract(ball.radiusProperty())).or(ball.centerXProperty().lessThan(ball.radiusProperty()));
-        isBouncingOffHorizontalWall = ball.centerYProperty().greaterThanOrEqualTo(pongPane.heightProperty().subtract(ball.radiusProperty())).or(ball.centerYProperty().lessThan(ball.radiusProperty()));
-
-        rightPaddle.xProperty().bind(pongPane.widthProperty().subtract(30));
-
-        startButton.layoutXProperty().bind(pongPane.widthProperty().subtract(startButton.widthProperty()).divide(2));
-        startButton.layoutYProperty().bind(pongPane.heightProperty().subtract(30));
-    }
-
-
     private void configureStage(Stage stage) {
-        Scene scene = new Scene(pongPane, 500, 500);
-        scene.setFill(Color.GRAY);
-        stage.setScene(scene);
-        stage.setTitle("SlowPong");
-        stage.show();
+        throw new RuntimeException("Not yet implemented !");
     }
 
     private Pane createPongPane() {
-        Pane pongPane = new Pane(ball,
-                leftPaddle,
-                rightPaddle,
-                startButton);
-        pongPane.setFocusTraversable(true);
-        pongPane.requestFocus();
-        return pongPane;
+        throw new RuntimeException("Not yet implemented !");
     }
 
     private Button createStartButton() {
-        Button startButton = new Button("Start!");
-        startButton.setOnAction(e -> pongAnimation.start());
-        startButton.visibleProperty().bind(startVisible);
-        return startButton;
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private void createBindings() {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private void updatePong(long elapsedTimeInNanoseconds) {
+        checkBouncing();
+        moveBall(elapsedTimeInNanoseconds);
+    }
+
+    private boolean isBouncingOffPaddles() {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private boolean isBouncingOffLeftPaddle() {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private boolean isBouncingOffRightPaddle() {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private boolean isBouncingOffVerticalWall() {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private boolean isBouncingOffHorizontalWall() {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private void checkBouncing() {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private void moveBall(long elapsedTimeInNanoseconds) {
+        throw new RuntimeException("Not yet implemented !");
+    }
+
+    private void startNewGame() {
+        throw new RuntimeException("Not yet implemented !");
     }
 
     private AnimationTimer createAnimation() {
@@ -126,33 +121,5 @@ public class SlowPong extends Application {
                 super.stop();
             }
         };
-    }
-
-    private void updatePong(long elapsedTimeInNanoseconds) {
-        checkBouncing();
-        moveBall(elapsedTimeInNanoseconds);
-    }
-
-    private void checkBouncing() {
-        if (isBouncingOffPaddles())
-            ball.velocityXProperty().set(-ball.getVelocityX());
-
-        if (isBouncingOffHorizontalWall())
-            ball.velocityYProperty().set(-ball.getVelocityY());
-
-        if (isBouncingOffVerticalWall()) {
-            startNewGame();
-        }
-    }
-
-    private void moveBall(long elapsedTimeInNanoseconds) {
-        ball.centerXProperty().set(ball.centerXProperty().get() + ball.velocityXProperty().get() * elapsedTimeInNanoseconds);
-        ball.centerYProperty().set(ball.centerYProperty().get() + ball.velocityYProperty().get() * elapsedTimeInNanoseconds);
-    }
-
-    private void startNewGame() {
-        pongAnimation.stop();
-        ball.setCenterX(250);
-        ball.setCenterY(250);
     }
 }
