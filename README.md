@@ -68,7 +68,7 @@ que le type `Object` qui peut couvrir tous les autres types) :
     
 Par exemple, la classe abstraite `IntegerProperty` permet d'emballer une valeur de type entier et d'offrir des méthodes 
 pour consulter et modifier la valeur mais également pour *"observer"* et *"lier"* les changements. La classe 
-`SimpleIntegerProperty` quant-à elle est une classe concrète prédéfinie permettant de créer une telle propriété.
+`SimpleIntegerProperty` quant à elle est une classe concrète prédéfinie permettant de créer une telle propriété.
 
 Toutes les classes de propriétés implémentent l'interface `Observable` et offrent de ce fait, la possibilité 
 d'enregistrer des observateurs (`Listener`) qui seront avertis lorsque la valeur de la propriété change.
@@ -89,40 +89,53 @@ rubriques (*Property Summary*) la liste des propriétés de la classe concernée
 Allez dans le paquetage `exercice1` et ouvrir la classe `PropertyExample`, puis :
 
 - Écrire la méthode `createProperty()` qui va initialiser la donnée membre `anIntProperty`, affichera l'objet créé ainsi 
-que sa valeur.
+que sa valeur, fixée à 1024.
 
 - Écrire avec une expression *lambda*, l'initialisation de la donnée membre `changeListener` qui est un écouteur de 
-changement de valeur. Cet écouteur se contente de faire un affichage de l'ancienne et de la nouvelle valeur de l'objet 
+changement de valeur. Cet écouteur se contente d'afficher le texte "The observableValue has changed:" suivi de l'ancienne et de la nouvelle valeur de l'objet 
 observé.
 
-- Écrire l'initialisation de la donnée membre `invalidationListener` qui est un écouteur d'invalidation de la valeur 
-d'une propriété. Cet expression lambda se contente de faire un affichage pour indiquer qu'un événement d'invalidation 
-s'est déclenché.
+- Écrire avec une autre expression *lambda*, l'initialisation de la donnée membre `invalidationListener` qui est un écouteur d'invalidation de la valeur 
+d'une propriété. Cet écouteur se contente d'afficher le texte "The observable has been invalidated." pour indiquer qu'un événement d'invalidation 
+s'est déclenché **sans pour autant afficher la valeur de l'objet observé**.
 
-- Écrire la méthode `addAndRemoveInvalidationListener()`. Cette méthode doit effectuer les actions suivantes :
-    - Ajouter l'objet `invalidationListener` comme écouteur de la propriété `anIntProperty`.
+- Écrire la méthode `addAndRemoveInvalidationListener()` dont les affichages serviront à comprendre le rôle d'un `InvalidationListener`.
+ Cette méthode doit effectuer les actions suivantes :
+    - Afficher sur la console le texte "Added invalidation listener." puis ajouter l'objet `invalidationListener` comme écouteur de la propriété `anIntProperty`
     
-    - Modifier la valeur de la propriété avec les méthodes `set()` et `setValue()`.
+    - Afficher le texte "setValue() with 1024." puis modifier la valeur de la propriété avec la méthode `setValue()` pour la fixer à 1024 (la même valeur qu'initialement afin d'observer le comportement de la propriété)
     
-    - Supprimer l'écouteur de la propriété
-    
-    - Modifier la valeur de la propriété
+    - Afficher le texte "set() with 2105." puis modifier à nouveau la valeur de la propriété avec la méthode `set()` pour la fixer à 2105
 
-  Chaque action sera tracée avec des affichages pour bien comprendre ce qui se passe.
+    - Afficher le texte "setValue() with 5012." puis modifier à nouveau la valeur de la propriété avec la méthode `setValue()` pour la fixer à 5012
+    
+    - Afficher le texte "Removed invalidation listener." puis supprimer l'écouteur de la propriété 
+    
+    - Afficher le texte "set() with 1024." puis modifier une dernière fois la valeur de la propriété avec la méthode `set()` pour la remettre à 1024
 
-- Écrire la méthode `addAndRemoveChangeListener()`. Cette méthode doit effectuer les actions suivantes :
-    - Ajouter l'objet `changeListener` comme écouteur de la propriété `anIntProperty`.
+- Écrire la méthode `addAndRemoveChangeListener()` dont les affichages serviront à comprendre le rôle d'un `ChangeListener`. 
+Cette méthode doit effectuer les actions suivantes :
+    - Afficher sur la console le texte "Added change listener." puis ajouter l'objet `changeListener` comme écouteur de la propriété `anIntProperty`
       
-    - Modifier la valeur de la propriété.
-      
-    - Supprimer l'écouteur de la propriété
-      
-    - Modifier la valeur de la propriété
-      
-  Chaque action sera tracée avec des affichages pour bien comprendre ce qui se passe.
+    - Afficher le texte "setValue() with 1024." puis modifier la valeur de la propriété avec la méthode `setValue()` pour la fixer à 1024 (la même valeur qu'elle possède déjà afin d'observer le comportement de la propriété)
+    
+    - Afficher le texte "set() with 2105." puis modifier à nouveau la valeur de la propriété avec la méthode `set()` pour la fixer à 2105
+
+    - Afficher le texte "setValue() with 5012." puis modifier à nouveau la valeur de la propriété avec la méthode `setValue()` pour la fixer à 5012
+
+    - Afficher le texte "Removed change listener." puis supprimer l'écouteur de la propriété 
+       
+    - Afficher le texte "set() with 1024." puis modifier une dernière fois la valeur de la propriété avec la méthode `set()` pour la remettre à 1024
   
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
-solution après chaque itération du cycle principal du workflow. 
+solution après chaque itération du cycle principal du workflow.
+
+Vous devriez remarquer que le premier `setValue()` est sans effet dans les deux cas, car la propriété est suffisamment intelligente pour s'apercevoir qu'il ne modifie pas sa valeur.
+Vous devriez aussi remarquer que l'`InvalidationListener` n'est averti que lors du premier changement effectif de valeur, à la différence du `ChangeListener` qui est systématiquement averti lorsque la valeur change. 
+En effet, après un changement, une propriété demeure invalide tant qu'on ne demande pas sa valeur avec `get()` ou `getValue()`.
+
+Pour le constater, vous pouvez ignorer les tests et ajouter l'affichage de la valeur dans l'expression lambda de l'écouteur `invalidationListener`.
+Dans ce cas, tout changement de valeur avertira l'`InvalidationListener` puisque ce dernier valide maintenant à chaque fois la valeur lors du `get()`.
 
 #### Exercice 2
 Un des avantages des propriétés JavaFX est la possibilité de pouvoir les lier entre-elles. Ce mécanisme, appelé 

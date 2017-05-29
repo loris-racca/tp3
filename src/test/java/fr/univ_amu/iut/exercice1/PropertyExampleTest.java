@@ -1,6 +1,7 @@
 package fr.univ_amu.iut.exercice1;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -20,6 +21,7 @@ public class PropertyExampleTest {
         System.setOut(out);
     }
 
+    @Ignore
     @Test
     public void createProperty() throws Exception {
         propertyExample.createProperty();
@@ -30,6 +32,7 @@ public class PropertyExampleTest {
         verify(out).println("anIntProperty.getValue() = 1024");
     }
 
+    @Ignore
     @Test
     public void addAndRemoveInvalidationListener() throws Exception {
         PropertyExample propertyExample = new PropertyExample();
@@ -38,26 +41,30 @@ public class PropertyExampleTest {
         propertyExample.addAndRemoveInvalidationListener();
 
         verify(out).println();
-        verify(out).println("Added invalidation listener.");
-        verify(out).println("Calling anIntProperty.set(2048).");
-        verify(out).println("The observable has been invalidated: IntegerProperty [value: 2048].");
-        verify(out).println("Calling anIntProperty.setValue(3072).");
-        verify(out).println("The observable has been invalidated: IntegerProperty [value: 3072].");
-        verify(out).println("Removed invalidation listener.");
-        verify(out).println("Calling anIntProperty.set(4096).");
+        verify(out).println("Add invalidation listener.");
+        verify(out).println("setValue() with 1024.");
+        verify(out).println("set() with 2105.");
+        verify(out).println("The observable has been invalidated.");
+        verify(out).println("setValue() with 5012.");
+        verify(out).println("Remove invalidation listener.");
+        verify(out).println("set() with 1024.");
     }
 
+    @Ignore
     @Test
     public void addAndRemoveChangeListener() throws Exception {
 
         propertyExample.addAndRemoveChangeListener();
 
         verify(out).println();
-        verify(out).println("Added change listener.");
-        verify(out).println("Calling anIntProperty.set(5120).");
-        verify(out).println("The observableValue has changed: oldValue = 1024, newValue = 5120");
-        verify(out).println("Removed change listener.");
-        verify(out).println("Calling anIntProperty.set(6144).");
+        verify(out).println("Add change listener.");
+        verify(out).println("setValue() with 1024.");
+        verify(out).println("set() with 2105.");
+        verify(out).println("The observableValue has changed: oldValue = 1024, newValue = 2105");
+        verify(out).println("setValue() with 5012.");
+        verify(out).println("The observableValue has changed: oldValue = 2105, newValue = 5012");
+        verify(out).println("Remove change listener.");
+        verify(out).println("set() with 1024.");
     }
 
 }
