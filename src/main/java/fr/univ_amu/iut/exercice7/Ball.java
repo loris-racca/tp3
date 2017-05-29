@@ -3,8 +3,11 @@ package fr.univ_amu.iut.exercice7;
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+
+import static javafx.beans.binding.Bindings.when;
 
 public class Ball {
 
@@ -23,14 +26,39 @@ public class Ball {
     private NumberBinding bounceOffHorizontalWall;
 
     public Ball(Pane parent) {
-        throw new RuntimeException("Not yet implemented !");
+        this.parent = parent;
+
+        positionX = new SimpleDoubleProperty(20);
+        positionY = new SimpleDoubleProperty(20);
+
+        velocityX = new SimpleDoubleProperty(150E-9);
+        velocityY = new SimpleDoubleProperty(100E-9);
+
+        radius = new SimpleDoubleProperty(10);
+        ball = new Circle();
+
+        createBindings();
+        parent.getChildren().addAll(ball);
     }
 
     private void createBindings() {
-        throw new RuntimeException("Not yet implemented !");
+        ball.radiusProperty().bind(radius);
+
+        ball.centerXProperty().bind(positionX);
+        ball.centerYProperty().bind(positionY);
+
+        isBouncingOffVerticalWall = positionX.greaterThanOrEqualTo(parent.widthProperty().subtract(radius)).or(positionX.lessThan(radius));
+        isBouncingOffHorizontalWall = positionY.greaterThanOrEqualTo(parent.heightProperty().subtract(radius)).or(positionY.lessThan(radius));
+
+        bounceOffVerticalWall = when(isBouncingOffVerticalWall).then(velocityX.negate()).otherwise(velocityX);
+        bounceOffHorizontalWall = when(isBouncingOffHorizontalWall).then(velocityY.negate()).otherwise(velocityY);
     }
 
     public void move(long elapsedTimeInNanoseconds) {
-        throw new RuntimeException("Not yet implemented !");
+        velocityX.set(bounceOffVerticalWall.doubleValue());
+        velocityY.set(bounceOffHorizontalWall.doubleValue());
+
+        positionX.set(positionX.get() + velocityX.get() * elapsedTimeInNanoseconds);
+        positionY.set(positionY.get() + velocityY.get() * elapsedTimeInNanoseconds);
     }
 }

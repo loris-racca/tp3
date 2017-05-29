@@ -1,152 +1,158 @@
 package fr.univ_amu.iut.exercice8;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.beans.binding.BooleanExpression;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class SlowPong extends Application {
 
-    /**
-     * The moving ball
-     */
-    private Circle ball;
-
-    /**
-     * The Group containing all of the walls, paddles, and ball. This also
-     * allows us to requestFocus for KeyEvents on the Group
-     */
-    private Group pongComponents;
-
-    /**
-     * The left and right paddles
-     */
+    private BooleanProperty startVisible = new SimpleBooleanProperty(true);
+    private Ball ball;
+    private Pane pongPane;
     private Paddle leftPaddle;
     private Paddle rightPaddle;
-
-    /**
-     * The walls
-     */
-    private Rectangle topWall;
-    private Rectangle rightWall;
-    private Rectangle leftWall;
-    private Rectangle bottomWall;
-
     private Button startButton;
+    private AnimationTimer pongAnimation;
 
+    private BooleanExpression isBouncingOffVerticalWall;
+    private BooleanExpression isBouncingOffHorizontalWall;
 
-    /**
-     * The animation of the ball
-     */
-    private Timeline pongAnimation;
-
-    /**
-     * Controls whether the ball is moving right
-     */
-    private boolean movingRight = true;
-
-    /**
-     * Controls whether the ball is moving down
-     */
-    private boolean movingDown = true;
-
-    private static boolean isInCollisionWith(Circle ball, Rectangle rectangle) {
-        return ball.intersects(rectangle.getBoundsInParent());
+    private boolean isBouncingOffPaddles() {
+        return isBouncingOffLeftPaddle() || isBouncingOffRightPaddle();
     }
 
-    /**
-     * Sets the initial starting positions of the ball and paddles
-     */
-    private void initialize() {
-        ball.centerXProperty().setValue(250);
-        ball.centerYProperty().setValue(250);
-        pongComponents.requestFocus();
+    private boolean isBouncingOffLeftPaddle() {
+        return ball.collided(leftPaddle);
     }
 
-    /**
-     * Checks whether or not the ball has collided with either the paddles,
-     * topWall, or bottomWall. If the ball hits the wall behind the paddles, the
-     * game is over.
-     */
-
-    private void checkForCollision() {
-        if (isEndOfGame()) {
-            pongAnimation.stop();
-            initialize();
-        } else if (isBouncingOnWall()) {
-            movingDown = !movingDown;
-        } else if (isBouncingOnPaddle()) {
-            movingRight = !movingRight;
-        }
+    private boolean isBouncingOffRightPaddle() {
+        return ball.collided(rightPaddle);
     }
 
-    private boolean isBouncingOnPaddle() {
-        return isInCollisionWith(ball, leftPaddle) || isInCollisionWith(ball, rightPaddle);
+    private boolean isBouncingOffVerticalWall() {
+        return isBouncingOffVerticalWall.get();
     }
 
-    private boolean isBouncingOnWall() {
-        return isInCollisionWith(ball, bottomWall) || isInCollisionWith(ball, topWall);
-    }
-
-    private boolean isEndOfGame() {
-        return isInCollisionWith(ball, rightWall) || isInCollisionWith(ball, leftWall);
+    private boolean isBouncingOffHorizontalWall() {
+        return isBouncingOffHorizontalWall.get();
     }
 
     @Override
     public void start(Stage stage) {
-        pongAnimation = new Timeline(
-                new KeyFrame(new Duration(60.0), t -> {
-                    checkForCollision();
-                    int horzPixels = movingRight ? 1 : -1;
-                    int vertPixels = movingDown ? 1 : -1;
+        pongAnimation = createAnimation();
 
-                    ball.centerXProperty().setValue(ball.centerXProperty().getValue() + horzPixels);
-                    ball.centerYProperty().setValue(ball.centerYProperty().getValue() + vertPixels);
-                })
-        );
+        ball = new Ball();
 
-        pongAnimation.setCycleCount(Timeline.INDEFINITE);
-
-        ball = new Circle(0, 0, 10, Color.WHITE);
-
-        topWall = new Rectangle(0, 0, 500, 1);
-        leftWall = new Rectangle(0, 0, 1, 500);
-        rightWall = new Rectangle(500, 0, 1, 500);
-        bottomWall = new Rectangle(0, 500, 500, 1);
-
-        leftPaddle = new Paddle(20);
+        leftPaddle = new Paddle(10);
         rightPaddle = new Paddle(470);
 
-        startButton = new Button("Start!");
-        startButton.setLayoutX(225);
-        startButton.setLayoutY(470);
+        startButton = createStartButton();
+        pongPane = createPongPane();
 
-        startButton.setOnAction(e -> pongAnimation.playFromStart());
+        configureStage(stage);
 
-        pongComponents = new Group(ball,
-                topWall,
-                leftWall,
-                rightWall,
-                bottomWall,
-                leftPaddle,
-                rightPaddle,
-                startButton);
+        createBindings();
+    }
 
-        pongComponents.setFocusTraversable(true);
+    private void createBindings() {
+        isBouncingOffVerticalWall = ball.centerXProperty().greaterThanOrEqualTo(pongPane.widthProperty().subtract(ball.radiusProperty())).or(ball.centerXProperty().lessThan(ball.radiusProperty()));
+        isBouncingOffHorizontalWall = ball.centerYProperty().greaterThanOrEqualTo(pongPane.heightProperty().subtract(ball.radiusProperty())).or(ball.centerYProperty().lessThan(ball.radiusProperty()));
 
-        initialize();
+        rightPaddle.xProperty().bind(pongPane.widthProperty().subtract(30));
 
-        Scene scene = new Scene(pongComponents, 500, 500);
+        startButton.layoutXProperty().bind(pongPane.widthProperty().subtract(startButton.widthProperty()).divide(2));
+        startButton.layoutYProperty().bind(pongPane.heightProperty().subtract(30));
+    }
+
+
+    private void configureStage(Stage stage) {
+        Scene scene = new Scene(pongPane, 500, 500);
         scene.setFill(Color.GRAY);
         stage.setScene(scene);
         stage.setTitle("SlowPong");
         stage.show();
+    }
+
+    private Pane createPongPane() {
+        Pane pongPane = new Pane(ball,
+                leftPaddle,
+                rightPaddle,
+                startButton);
+        pongPane.setFocusTraversable(true);
+        pongPane.requestFocus();
+        return pongPane;
+    }
+
+    private Button createStartButton() {
+        Button startButton = new Button("Start!");
+        startButton.setOnAction(e -> pongAnimation.start());
+        startButton.visibleProperty().bind(startVisible);
+        return startButton;
+    }
+
+    private AnimationTimer createAnimation() {
+        final LongProperty lastUpdateTime = new SimpleLongProperty(0);
+
+        return new AnimationTimer() {
+            @Override
+            public void handle(long timestamp) {
+                if (lastUpdateTime.get() > 0) {
+                    long elapsedTimeInNanoseconds = timestamp - lastUpdateTime.get();
+                    updatePong(elapsedTimeInNanoseconds);
+                }
+                lastUpdateTime.set(timestamp);
+            }
+
+            @Override
+            public void start() {
+                lastUpdateTime.set(System.nanoTime());
+                startVisible.set(false);
+                super.start();
+            }
+
+            @Override
+            public void stop() {
+                lastUpdateTime.set(System.nanoTime());
+                startVisible.set(true);
+                super.stop();
+            }
+        };
+    }
+
+    private void updatePong(long elapsedTimeInNanoseconds) {
+        checkBouncing();
+        moveBall(elapsedTimeInNanoseconds);
+    }
+
+    private void checkBouncing() {
+        if (isBouncingOffPaddles())
+            ball.velocityXProperty().set(-ball.getVelocityX());
+
+        if (isBouncingOffHorizontalWall())
+            ball.velocityYProperty().set(-ball.getVelocityY());
+
+        if (isBouncingOffVerticalWall()) {
+            startNewGame();
+        }
+    }
+
+    private void moveBall(long elapsedTimeInNanoseconds) {
+        ball.centerXProperty().set(ball.centerXProperty().get() + ball.velocityXProperty().get() * elapsedTimeInNanoseconds);
+        ball.centerYProperty().set(ball.centerYProperty().get() + ball.velocityYProperty().get() * elapsedTimeInNanoseconds);
+    }
+
+    private void startNewGame() {
+        pongAnimation.stop();
+        ball.setCenterX(250);
+        ball.setCenterY(250);
     }
 }

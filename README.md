@@ -394,3 +394,29 @@ position de la balle (en fonction du temps écoulé, de la position précédente
 bien attention aux unités car la vitesse de la balle doit être exprimée en *pixel/nanoseconde*.
 
 #### Exercice 8
+Maintenant que nous disposons d'une balle rebondissante *à la pong*, nous allons réaliser le jeu complet. Pour rajouter
+de la difficulté de jeu, notre pong se jouera à un seul joueur qui actionnera les raquettes à la souris. La vitesse de 
+jeu sera donc lente pour permettre d'avoir le temps de réagir.
+
+La première classe que nous allons implémenter est la classe `Paddle`. Cette classe étends la classe `Rectangle` à 
+laquelle on ajoute des propriétés pour interagir plus facilement à la souris. La première `paddleY`, du 
+type `DoubleProperty`, mémorise la position verticale de la raquette.
+ 
+La propriété `initPaddleTranslateY` mémorise la position verticale de la raquette au moment où l'on presse sur le bouton 
+de la souris pour déplacer la raquette. La propriété `paddleDragAnchorY` mémorise la position du de la souris par rapport 
+au coin de la scène. Ces deux propriétés permettent à l'utilisateur de conserver le même décalage sur la raquette pendant 
+tout le déplacement.
+
+Dans le Paquetage `exercice8`, ouvrir la classe `Paddle` et l'implémenter en respectant les consignes suivantes :
+
+- Dans le constructeur, configurer la raquette pour être un rectangle de 20 de largeur et de 50 de hauteur. Changer la 
+couleur de remplissage en bleu. Changer le curseur pour qu'une main fermée apparaisse quand on survol la raquette.
+ 
+- Ajouteur un écouteur d'évenement sur la propriété `OnMousePressed`. Cet gestionaire doit valoriser la propriété 
+`initPaddleTranslateY` et `paddleDragAnchorY`.
+
+- Ajouter un écouteur d'événement sur la propriété `OnMouseDragged` qui modifie la valeur de la propriété `paddleY` 
+en fonction de la position courante de la souris en prenant en compte la position initiale de la main sur la raquette.
+
+- Soumettre la propriété `translateY` au valeurs de `paddleY` pour déplacer correctement le rectangle de la raquette 
+pendant que l'utilisateur la drag-and-drop.
