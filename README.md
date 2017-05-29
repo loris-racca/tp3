@@ -364,6 +364,7 @@ la méthode statique `Bindings.bindBidirectional()`.
 
 
 #### Exercice 7
+
 Dans cet exercice, notre objectif va être de simuler une balle rebondissante *à la pong*. 
 Notre balle se déplacera à une vitesse fixe et changera sa direction à chaque fois qu'elle 
 arrivera contre l'un des bords de la fenêtre.
@@ -391,3 +392,5 @@ L'objectif de ces deux bindings est de mettre à jour correctement la vitesse de
 - Écrire la méthode `move(long elapsedTimeInNanoseconds)` qui met à jour la vitesse (avec les bindings précédents) et la 
 position de la balle (en fonction du temps écoulé, de la position précédente et de la vitesse). Faites 
 bien attention aux unités car la vitesse de la balle doit être exprimée en *pixel/nanoseconde*.
+
+#### Exercice 8

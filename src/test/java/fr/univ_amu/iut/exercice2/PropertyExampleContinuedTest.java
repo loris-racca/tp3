@@ -1,6 +1,7 @@
 package fr.univ_amu.iut.exercice2;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -19,6 +20,7 @@ public class PropertyExampleContinuedTest {
         System.setOut(out);
     }
 
+    @Ignore
     @Test
     public void bindAndUnbindOnePropertyToAnother() throws Exception {
         propertyExample.bindAndUnbindOnePropertyToAnother();
