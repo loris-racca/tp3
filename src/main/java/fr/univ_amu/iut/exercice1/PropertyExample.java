@@ -6,8 +6,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 
 public class PropertyExample {
-    private final ChangeListener changeListener;
-    private final InvalidationListener invalidationListener;
+    private ChangeListener changeListener;
+    private InvalidationListener invalidationListener;
 
     private IntegerProperty anIntProperty;
 
@@ -19,18 +19,17 @@ public class PropertyExample {
     }
 
     void createProperty() {
+        throw new RuntimeException("Not yet implemented !");
     }
 
     void addAndRemoveInvalidationListener() {
+        throw new RuntimeException("Not yet implemented !");
     }
 
     void addAndRemoveChangeListener() {
+        throw new RuntimeException("Not yet implemented !");
     }
 
-    /*
-        Cette fin du code de la classe est à ignorer.
-        Elle ne sert que pour faire fonctionner les tests.
-     */
 
     public int getAnInt() {
         return anIntProperty.get();
