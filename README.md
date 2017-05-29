@@ -102,7 +102,7 @@ s'est déclenché **sans pour autant afficher la valeur de l'objet observé**.
 
 - Écrire la méthode `addAndRemoveInvalidationListener()` dont les affichages serviront à comprendre le rôle d'un `InvalidationListener`.
  Cette méthode doit effectuer les actions suivantes :
-    - Afficher sur la console le texte "Added invalidation listener." puis ajouter l'objet `invalidationListener` comme écouteur de la propriété `anIntProperty`
+    - Afficher sur la console le texte "Add invalidation listener." puis ajouter l'objet `invalidationListener` comme écouteur de la propriété `anIntProperty`
     
     - Afficher le texte "setValue() with 1024." puis modifier la valeur de la propriété avec la méthode `setValue()` pour la fixer à 1024 (la même valeur qu'initialement afin d'observer le comportement de la propriété)
     
@@ -110,13 +110,13 @@ s'est déclenché **sans pour autant afficher la valeur de l'objet observé**.
 
     - Afficher le texte "setValue() with 5012." puis modifier à nouveau la valeur de la propriété avec la méthode `setValue()` pour la fixer à 5012
     
-    - Afficher le texte "Removed invalidation listener." puis supprimer l'écouteur de la propriété 
+    - Afficher le texte "Remove invalidation listener." puis supprimer l'écouteur de la propriété 
     
     - Afficher le texte "set() with 1024." puis modifier une dernière fois la valeur de la propriété avec la méthode `set()` pour la remettre à 1024
 
 - Écrire la méthode `addAndRemoveChangeListener()` dont les affichages serviront à comprendre le rôle d'un `ChangeListener`. 
 Cette méthode doit effectuer les actions suivantes :
-    - Afficher sur la console le texte "Added change listener." puis ajouter l'objet `changeListener` comme écouteur de la propriété `anIntProperty`
+    - Afficher sur la console le texte "Add change listener." puis ajouter l'objet `changeListener` comme écouteur de la propriété `anIntProperty`
       
     - Afficher le texte "setValue() with 1024." puis modifier la valeur de la propriété avec la méthode `setValue()` pour la fixer à 1024 (la même valeur qu'elle possède déjà afin d'observer le comportement de la propriété)
     
@@ -124,7 +124,7 @@ Cette méthode doit effectuer les actions suivantes :
 
     - Afficher le texte "setValue() with 5012." puis modifier à nouveau la valeur de la propriété avec la méthode `setValue()` pour la fixer à 5012
 
-    - Afficher le texte "Removed change listener." puis supprimer l'écouteur de la propriété 
+    - Afficher le texte "Remove change listener." puis supprimer l'écouteur de la propriété 
        
     - Afficher le texte "set() with 1024." puis modifier une dernière fois la valeur de la propriété avec la méthode `set()` pour la remettre à 1024
   
