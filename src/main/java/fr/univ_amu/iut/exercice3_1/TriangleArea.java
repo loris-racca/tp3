@@ -1,7 +1,6 @@
 package fr.univ_amu.iut.exercice3_1;
 
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.binding.StringExpression;
 import javafx.beans.property.IntegerProperty;
@@ -64,20 +63,10 @@ public class TriangleArea {
     }
 
     void printResult() {
-        System.out.println(output.getValue());
+        throw new RuntimeException("Not yet implemented !");
     }
 
     private void createBinding() {
-        area = x1.multiply(y2)
-                .add(x2.multiply(y3))
-                .add(x3.multiply(y1))
-                .subtract(x1.multiply(y3))
-                .subtract(x2.multiply(y1))
-                .subtract(x3.multiply(y2))
-                .divide(2.0D);
-
-        output = Bindings.format(
-                "For P1(%d,%d), P2(%d,%d), P3(%d,%d), the area of triangle ABC is %3.1f",
-                x1, y1, x2, y2, x3, y3, area);
+        throw new RuntimeException("Not yet implemented !");
     }
 }

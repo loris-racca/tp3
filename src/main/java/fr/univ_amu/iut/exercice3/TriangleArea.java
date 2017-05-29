@@ -1,13 +1,10 @@
 package fr.univ_amu.iut.exercice3;
 
 
-import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
-import static javafx.beans.binding.Bindings.*;
 
 public class TriangleArea {
 
@@ -140,29 +137,10 @@ public class TriangleArea {
     }
 
     void printResult() {
-        System.out.println("For P1(" + x1.get() + "," + y1.get() + "), " +
-                "P2(" + x2.get() + "," + y2.get() + "), " +
-                "P3(" + x3.get() + "," + y3.get() + "), " +
-                "the area of triangle ABC is " + area.getValue());
+        throw new RuntimeException("Not yet implemented !");
     }
 
     private void createBinding() {
-        final NumberBinding x1y2 = multiply(x1, y2);
-        final NumberBinding x2y3 = multiply(x2, y3);
-        final NumberBinding x3y1 = multiply(x3, y1);
-        final NumberBinding x1y3 = multiply(x1, y3);
-        final NumberBinding x2y1 = multiply(x2, y1);
-        final NumberBinding x3y2 = multiply(x3, y2);
-
-        final NumberBinding sum1 = add(x1y2, x2y3);
-        final NumberBinding sum2 = add(sum1, x3y1);
-        final NumberBinding sum3 = add(sum2, x3y1);
-        final NumberBinding diff1 = subtract(sum3, x1y3);
-        final NumberBinding diff2 = subtract(diff1, x2y1);
-        final NumberBinding determinant = subtract(diff2, x3y2);
-
-        NumberBinding areaBinding = divide(determinant, 2.0D);
-
-        area.bind(when(greaterThan(0, areaBinding)).then(negate(areaBinding)).otherwise(areaBinding));
+        throw new RuntimeException("Not yet implemented !");
     }
 }
