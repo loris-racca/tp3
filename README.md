@@ -86,10 +86,11 @@ Les composants utilisés dans les interfaces graphiques (boutons, champs texte, 
 tous de nombreuses propriétés. Pour chacun des composants, la documentation (*Javadoc*) décrit dans une des 
 rubriques (*Property Summary*) la liste des propriétés de la classe concernée ainsi que celles qui sont héritées.
 
+Cet exercice permet d'illustrer le rôle de ces deux types d'écouteurs.
 Allez dans le paquetage `exercice1` et ouvrir la classe `PropertyExample`, puis :
 
-- Écrire la méthode `createProperty()` qui va initialiser la donnée membre `anIntProperty`, affichera l'objet créé ainsi 
-que sa valeur, fixée à 1024.
+- Écrire la méthode `createProperty()` qui va initialiser la donnée membre `anIntProperty` avec un `SimpleIntegerProperty`, puis afficher l'objet créé ainsi 
+que sa valeur, qui aura été fixée à 1024.
 
 - Écrire avec une expression *lambda*, l'initialisation de la donnée membre `changeListener` qui est un écouteur de 
 changement de valeur. Cet écouteur se contente d'afficher le texte "The observableValue has changed:" suivi de l'ancienne et de la nouvelle valeur de l'objet 
@@ -145,14 +146,14 @@ Dans les interfaces utilisateurs, on a fréquemment ce type de liens. Par exempl
 slider, la valeur d'un champ texte changera (ou la luminosité d'une image, la taille d'un graphique, le niveau sonore, etc.).
 
 Il est possible de lier deux propriétés **A** et **B** de manière :
-- *Unidirectionnelle* : un changement de **A** entraînera un changement de **B** mais pas l'inverse (**B** non modifiable autrement).
+- *Unidirectionnelle* : un changement de **A** entraînera un changement de **B** mais pas l'inverse (**B** ne devant pas être modifié autrement).
 
 - *Bidirectionnelle* : un changement de **A** entraînera un changement de **B** et réciproquement (les deux sont modifiables).
     
 La méthode `bind()` permet de créer un lien unidirectionnel. La méthode doit être appelée sur la propriété qui sera 
 *"soumise"* à l'autre (celle qui est passée en paramètre). Une propriété ne peut être liée (asservie) qu'à une seule 
 autre si le lien est unidirectionnel (`bind()`). Si l'on tente de modifier la valeur de la propriété associée d'une 
-autre manière, une exception sera générée. 
+autre manière, une exception sera levée. 
 
 Allez dans le paquetage `exercice2` et ouvrir la classe `PropertyExampleContinued`, puis l'implémenter en respectant les 
 consignes suivantes :
