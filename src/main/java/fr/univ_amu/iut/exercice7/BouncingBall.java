@@ -58,6 +58,18 @@ public class BouncingBall extends Application {
                 }
                 lastUpdateTime.set(timestamp);
             }
+
+            @Override
+            public void start() {
+                lastUpdateTime.set(System.nanoTime());
+                super.start();
+            }
+
+            @Override
+            public void stop() {
+                lastUpdateTime.set(System.nanoTime());
+                super.stop();
+            }
         };
     }
 
