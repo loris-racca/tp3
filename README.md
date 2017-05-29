@@ -183,7 +183,7 @@ consignes suivantes :
   
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
 solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
-observer le comportement de la fonction `main()` à travers l'affichage sur la console.
+observer le comportement de la fonction `bindAndUnbindOnePropertyToAnother()` à travers l'affichage sur la console.
 
 #### Exercice 3
 Parfois, une propriété dépend d'une autre mais avec une relation plus complexe. Il est ainsi possible de créer des 
@@ -192,7 +192,7 @@ Parfois, une propriété dépend d'une autre mais avec une relation plus complex
 Deux techniques (dites de "haut-niveau") sont à disposition (elles peuvent être combinées) :
 
    - Utiliser la classe utilitaire `Bindings` qui possède de nombreuses méthodes statiques permettant d'effectuer des 
-   opérations.
+   opérations impliquant un ou plusieurs objets observables (dont les propriétés)
 
    - Utiliser les méthodes disponibles dans les classes qui représentent les propriétés; ces méthodes peuvent être 
    chaînées (Fluent API).
@@ -216,31 +216,34 @@ Un jeu d'opérations est disponible aussi bien avec la classe `Bindings` qu'avec
 - et beaucoup d'autres que l'on peut découvrir en parcourant la JavaDoc de la classe 
 [`Bindings`](https://docs.oracle.com/javase/8/javafx/api/javafx/beans/binding/Bindings.html).
 
-Allez dans le paquetage `exercice3` et ouvrir la classe `TriangleArea`, puis implémenter la méthode `createBinding()` en respectant les 
+Cet exercice illustre l'utilisation de multiples binding de haut niveau afin de mettre à jour automatiquement la valeur 
+de l'aire d'un triangle à partir des coordonnées de ses 3 sommets. 
+Allez dans le paquetage `exercice3` et ouvrez la classe `TriangleArea`. Implémentez sa méthode `createBinding()` en respectant les 
 consignes suivantes :
 
 - En utilisant uniquement la classe `Bindings`, soumettez la propriété `area` aux propriétés `x1`,`x2`,`x3`,`y1`,`y2`,`y3` 
 représentant les coordonnées des trois sommets d'un triangle.
 
-- La formule à utiliser est celle dite du déterminant : *|(x1\*y2 - x1\*y3 + x2\*y3 - x2\*y1 + x3\*y1 - x3\*y2)|/2*
+- La formule à utiliser pour le calcul de l'aire est celle dite du déterminant : *|(x1\*y2 - x1\*y3 + x2\*y3 - x2\*y1 + x3\*y1 - x3\*y2)|/2*
 
 - Pour chacune des parties du calcul, vous utiliserez un object du type `NumberBinding`.
 
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
 solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
-observer le comportement de la fonction `main()` à travers l'affichage sur la console. Comme vous pourrez le voir, le 
-calcul de la valeur de l'aire est fait automatiquement à chaque fois que nécessaire.
+observer le comportement de la fonction `main()` à travers l'affichage sur la console. Comme vous pourrez le voir, la valeur de l'aire 
+a bien été calculée automatiquement avant chaque affichage.
 
 #### Exercice 3 : Variante 1
 Dans cette variante, on vous demande de réaliser la même application mais en utilisant la Fluent API au lieu de la 
 classe `Bindings`.
+En outre, `printResult()` devra se contenter d'afficher la valeur d'une expression de type `StringExpression` nommée `output`, 
+qui doit être liée aux six coordonnées et à l'aire du triangle pour mettre à jour la chaîne à afficher.
+Rajoutez la création de ce binding dans la méthode `createBinding()`.
+Si besoin, vous pouvez utiliser des bindings intermédiaires, notamment pour supporter la valeur absolue dans la formule. 
 
-L'affichage de la méthode `printResult()` utilise maintenant lui aussi un binding qui va lier les six coordonnées et 
-l'aire à une propriété de type `StringExpression` appelée `output`. Rajouter la création de ce binding dans la méthode
-`createBinding()`
 
 #### Exercice 3 : Variante 2 
-Dans cette seconde variante, on vous demande d'utiliser un *low-level binding* pour réaliser ce calcul. Il est possible 
+Dans cette seconde variante, on vous demande d'utiliser un *low-level binding* pour réaliser le calcul de l'aire. Il est possible 
 de définir une liaison de plus bas niveau en redéfinissant la méthode abstraite `computeValue()` d'une des classes de 
 binding (`DoubleBinding`, `BooleanBinding`, `StringBinding`, …).
 
