@@ -39,13 +39,13 @@ En Java, une propriété est un élément d'une classe que l'on peut manipuler �
 de setters (écriture). Les propriétés sont généralement représentées par des attributs de la classe mais elles pourraient 
 aussi être stockées dans une base de données ou autre système d'information.
 
-Classiquement la convention dite *"JavaBeans"*, définie qu'une classe possédant une propriété nommée `XXX` doit avoir une 
+Classiquement la convention dite *"JavaBeans"*, définit qu'une classe possédant une propriété nommée `XXX` doit avoir une 
 méthode `getXXX()` et `setXXX()`. En plus de ces méthodes, les propriétés JavaFX possèdent une troisième méthode 
 `XXXProperty()` qui retourne un objet qui implémente l'interface `Property`.
 
 Intérêt des propriétés :
 
-- Elles peuvent déclencher un événement lorsque leur valeur change et un gestionnaire d'événement (`Listener`) peut réagir en conséquence.
+- Elles peuvent déclencher un événement lorsque leur valeur est modifiée et un gestionnaire d'événement (`Listener`) peut réagir en conséquence.
 
 - Elles peuvent être liées entre-elles (Binding), c.-à-d. que le changement d'une propriété entraîne automatiquement la mise à jour d'une autre.
 
@@ -206,7 +206,7 @@ Allez dans le paquetage `exercice3` et ouvrir la classe `TriangleArea`, puis imp
 consignes suivantes :
 
 - En utilisant uniquement la classe `Bindings`, soumettez la propriété `area` aux propriétés `x1`,`x2`,`x3`,`y1`,`y2`,`y3` 
-représentants les coordonnées des trois sommets d'un triangle.
+représentant les coordonnées des trois sommets d'un triangle.
 
 - La formule à utiliser est celle dite du déterminant : *|(x1\*y2 - x1\*y3 + x2\*y3 - x2\*y1 + x3\*y1 - x3\*y2)|/2*
 
@@ -269,8 +269,8 @@ de graduation. L'incrément sera de 1 pour conserver des coordonnées entières.
 - Écrire la méthode `configGridPane()` qui personnalise l'objet `GridPane` qui sera utilisé comme racine du graphe de 
 scène. Le pading doit être initialisé à la valeur 10 dans les quatre directions. L'espacement vertical et horizontal 
 sera aussi configuré à la même valeur. La première colonne doit être contrainte `ColumnConstraint` avec une taille 
-préférée de 50 et une taille minimale de 50. La seconde colonne, aura une contrainte qui spécifiera que la colonne aura 
-sa largeur aura une largeur qui s'adaptera en fonction de la largeur de la scène.
+préférée de 50 et une taille minimale de 50. La seconde colonne aura une contrainte qui spécifiera que  
+sa largeur s'adaptera à la largeur restante de la scène.
 
 - Écrire la méthode `addSliders()` qui ajoute tous les sliders dans la bonne ligne de la grille. Chaque slider aura un 
 label qui permettra à l'utilisateur de savoir sur quelle propriété il agit. Il faudra donc rajouter les labels dans la 
@@ -287,10 +287,10 @@ observer le comportement de votre IHM. Comme vous pourrez le voir, le calcul de 
 automatiquement à chaque fois que nécessaire.
 
 #### Exercice 5
-L'exercice précédent illustre comment les propriétés et les bindings facilitent la création d'une application ou 
+L'exercice précédent illustre comment les propriétés et les bindings facilitent la création d'une application où 
 un modèle (une classe métier comme `TriangleArea` pour faire simple) pourra facilement être associé à une vue (une IHM).
 Nous allons aller plus loin pour montrer que ce principe peut s'appliquer en cascade. En plus de nos points soumis à des 
-sliders, nous allons dessiner le triangle en soumettant les arrêtes aux coordonnées de des points.
+sliders, nous allons dessiner le triangle en soumettant les arrêtes aux coordonnées des points.
 
 Pour dessiner, nous allons rajouter un panneau de type `Pane` de 500 de haut par 500 de large. À l’intérieur de ce 
 panneau, il y aura 3 segments (objets de la classe `Line`). Les points de départ et d'arrivé de ces segments seront liées 
@@ -300,13 +300,13 @@ Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
 
 ![](src/main/resources/assets/triangle2.png)
 
-Dans le Paquetage `exercice5`, ouvrir la classe `TriangleAreaCalculatorAndDrawer` et l'implémenter en respectant les consignes 
+Dans le paquetage `exercice5`, ouvrir la classe `TriangleAreaCalculatorAndDrawer` et l'implémenter en respectant les consignes 
 suivantes :
 
 - La classe `TriangleAreaCalculatorAndDrawer` doit respecter les mêmes contraintes que la classe `TriangleAreaCalculator`.
 
 - La méthode `addDrawPane()` doit configurer la données membre `drawPane` pour qu'elle ait une taille de 500 par 500. 
-Son arrière plan sera de couleur gris clair. Les trois cotés du triangles sont à ajouter à ce panneau. Ce panneau sera 
+Son arrière plan sera de couleur gris clair. Les trois côtés du triangles sont à ajouter à ce panneau. Ce panneau sera 
 à ajouter dans la première colonne et dernière ligne du `GridPane`.
 
 - Le méthode `createBinding()` qui doit, en plus des bindings de l'exercice précédents, rajouter les liens entre les coordonnées du triangle 
