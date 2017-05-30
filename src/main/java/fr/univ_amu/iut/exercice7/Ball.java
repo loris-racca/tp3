@@ -26,39 +26,14 @@ public class Ball {
     private NumberBinding bounceOffHorizontalWall;
 
     public Ball(Pane parent) {
-        this.parent = parent;
-
-        positionX = new SimpleDoubleProperty(20);
-        positionY = new SimpleDoubleProperty(20);
-
-        velocityX = new SimpleDoubleProperty(150E-9);
-        velocityY = new SimpleDoubleProperty(100E-9);
-
-        radius = new SimpleDoubleProperty(10);
-        ball = new Circle();
-
-        createBindings();
-        parent.getChildren().addAll(ball);
+        throw new RuntimeException("Not yet implemented !"); 
     }
 
     private void createBindings() {
-        ball.radiusProperty().bind(radius);
-
-        ball.centerXProperty().bind(positionX);
-        ball.centerYProperty().bind(positionY);
-
-        isBouncingOffVerticalWall = positionX.greaterThanOrEqualTo(parent.widthProperty().subtract(radius)).or(positionX.lessThan(radius));
-        isBouncingOffHorizontalWall = positionY.greaterThanOrEqualTo(parent.heightProperty().subtract(radius)).or(positionY.lessThan(radius));
-
-        bounceOffVerticalWall = when(isBouncingOffVerticalWall).then(velocityX.negate()).otherwise(velocityX);
-        bounceOffHorizontalWall = when(isBouncingOffHorizontalWall).then(velocityY.negate()).otherwise(velocityY);
+        throw new RuntimeException("Not yet implemented !"); 
     }
 
     public void move(long elapsedTimeInNanoseconds) {
-        velocityX.set(bounceOffVerticalWall.doubleValue());
-        velocityY.set(bounceOffHorizontalWall.doubleValue());
-
-        positionX.set(positionX.get() + velocityX.get() * elapsedTimeInNanoseconds);
-        positionY.set(positionY.get() + velocityY.get() * elapsedTimeInNanoseconds);
+        throw new RuntimeException("Not yet implemented !"); 
     }
 }
