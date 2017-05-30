@@ -10,7 +10,7 @@
     * Consulter et/ou créér des [issues](https://github.com/IUTInfoAix-M2105/tp1/issues).
     * [Email](mailto:sebastien.nedjar@univ-amu.fr) pour une question d'ordre privée, ou pour convenir d'un rendez-vous physique.
 
-## TP 3 :  Propriétés, Binding et le FXML [![Build Status](https://travis-ci.com/IUTInfoAix-M2105/tp3.svg?token=zPXgu159amQhEb4ShTxW)](https://travis-ci.com/IUTInfoAix-M2105/tp3)
+## TP 3 :  Propriétés et Bindings [![Build Status](https://travis-ci.com/IUTInfoAix-M2105/tp3.svg?token=zPXgu159amQhEb4ShTxW)](https://travis-ci.com/IUTInfoAix-M2105/tp3)
 
 JavaFX 8.0 regroupe un ensemble d'API de Java 8 Standard Edition permettant le développement rapide d'applications 
 graphiques modernes (aussi bien que des jeux 3D !). JavaFX 8.0 est tellement riche que sa 
