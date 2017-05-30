@@ -362,8 +362,12 @@ respectant les consignes suivantes :
 différent, une conversion doit être effectuée en passant un objet `NumberStringConverter` comme troisième paramètre de 
 la méthode statique `Bindings.bindBidirectional()`.
 
+#### Quelques précisions sur la méthode addTextField()
 
-On peut associer un formateur de texte à tous les composants qui héritent de `TextInputControl` (propriété `TextFormatter`).
+Bien qu'il ne vous soit rien demandé d'autre dans cet exercice, il n'est pas inutile de préciser le rôle des quelques lignes de code précédant l'ajout du `TextField` dans la méthode `addTextField()`.
+Ces lignes servent à procéder à quelques contrôles sur le texte saisi, en lui appliquant un **filtre**.
+
+En effet, on peut associer un formateur de texte à tous les composants qui héritent de `TextInputControl` (propriété `TextFormatter`).
 Ce formateur est un composant de type `TextFormatter<V>` qui permet de définir :
   * Un convertisseur permettant de convertir le texte du composant en une valeur d'un autre type (par exemple un type 
   numérique, int, double, …).
@@ -410,7 +414,7 @@ La classe contient de nombreuses méthodes permettant de réagir aux changements
 Les opérations disponibles sont des opérations de bas niveau qui permettent d'intervenir lors de la frappe des caractères 
 dans le champ mais qui nécessitent plus de travail pour créer des filtres plus complexes (adresse e-mail ou numéro de 
 téléphone valide, etc.). Pour comprendre le fonctionnnement de ce mécanisme, vous pouvez étudier et modifier la 
-méthode `addTextField()` pour que les valeurs du champ de texte soit toujours compatible avec les valeurs du slider.
+méthode `addTextField()` pour que les valeurs du champ de texte soit toujours compatibles avec les valeurs du slider.
 
 #### Exercice 7
 
