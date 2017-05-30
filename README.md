@@ -366,7 +366,7 @@ la méthode statique `Bindings.bindBidirectional()`.
 #### Exercice 7
 
 Dans cet exercice, notre objectif va être de simuler une balle rebondissante *à la pong*. 
-Notre balle se déplacera à une vitesse fixe et changera sa direction à chaque fois qu'elle 
+Notre balle se déplacera à une vitesse fixe et changera de direction à chaque fois qu'elle 
 arrivera contre l'un des bords de la fenêtre.
   
 Notre application finale devrait ressembler à cela :
@@ -375,23 +375,26 @@ Notre application finale devrait ressembler à cela :
 
 Pour ce faire, nous allons implémenter le comportement de la balle pratiquement qu'avec des bindings.
 
-Dans le Paquetage `exercice7`, ouvrir la classe `Ball` et l'implémenter en respectant les consignes suivantes :
+Dans le paquetage `exercice7`, ouvrir la classe `Ball` et l'implémenter en respectant les consignes suivantes :
 
-- Écrire le contructeur de la classe `Ball`. Il devra correctement initialiser les différentes données membres. Ajouter 
-le cercle `ball` au panneau `parent`. L'initialisation des bindings sera délégué à la méthode `createBindings()` qui 
+- Écrire le contructeur de la classe `Ball`. Il devra correctement initialiser les différentes données membres. 
+Les propriétés `velocityX` et `velocityY` expriment la vitesse de la balle en pixel/nanoseconde sur les deux axes (X et Y).
+Initialisez-les avec une petite valeur, telles que 150E-9 et 100E-9.
+Ajouter 
+le cercle `ball` au panneau `parent`. L'initialisation des bindings sera déléguée à la méthode `createBindings()` qui 
 sera appelée en fin de constructeur.
 
 - Écrire la méthode `createBindings()` qui initialise tous les bindings entre les différentes propriétés de la classe. 
 La position et le rayon du cercle servant à materialiser la balle devront être correctement soumis aux données membres 
 correspondantes. Les expressions booléennes `isBouncingOffVerticalWall` et `isBouncingOffHorizontalWall` seront 
-initialisée à partir de la position de la balle et de la taille du panneau `parent`. Regardez dans les méthodes de 
-`Bindings` celles qui concernent les booléens. Initialisez `bounceOffVerticalWall` et `bounceOffHorizontalWall` en 
+soumises à la position de la balle et à la taille du panneau `parent`. Elles doivent indiquer si la balle a atteint un bord vertical ou horizontal. Regardez dans les méthodes de 
+`Bindings` celles qui concernent les booléens. Liez `bounceOffVerticalWall` et `bounceOffHorizontalWall` en 
 utilisant une construction du type `Bindings.when().then().otherwise()` et les expressions booléennes précédentes. 
-L'objectif de ces deux bindings est de mettre à jour correctement la vitesse de la balle à chaque instant.
+L'objectif de ces deux bindings est de mettre à jour correctement la vitesse de la balle à chaque instant si elle rebondit sur un bord.
 
 - Écrire la méthode `move(long elapsedTimeInNanoseconds)` qui met à jour la vitesse (avec les bindings précédents) et la 
 position de la balle (en fonction du temps écoulé, de la position précédente et de la vitesse). Faites 
-bien attention aux unités car la vitesse de la balle doit être exprimée en *pixel/nanoseconde*.
+bien attention aux unités car la vitesse de la balle doit être exprimée en *pixel/nanoseconde*. Cette méthode sera appelée régulièrement par l'animation de la classe `BouncingBall` qui est démarrée et arrêtée par les boutons.
 
 #### Exercice 8
 Maintenant que nous disposons d'une balle rebondissante *à la pong*, nous allons réaliser le jeu complet. Pour rajouter
