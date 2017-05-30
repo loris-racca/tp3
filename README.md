@@ -356,12 +356,61 @@ respectant les consignes suivantes :
   
 - Le rayon du cercle doit être synchronisé avec la valeur du slider.
 
+- Le rayon doit être initialisé à 150.
+
 - Le texte du `textField` doit aussi être synchronisé avec le rayon du cercle. Le type des deux propriétés étant 
 différent, une conversion doit être effectuée en passant un objet `NumberStringConverter` comme troisième paramètre de 
 la méthode statique `Bindings.bindBidirectional()`.
 
-- Le rayon doit être initialisé à 150.
 
+On peut associer un formateur de texte à tous les composants qui héritent de `TextInputControl` (propriété `TextFormatter`).
+Ce formateur est un composant de type `TextFormatter<V>` qui permet de définir :
+  * Un convertisseur permettant de convertir le texte du composant en une valeur d'un autre type (par exemple un type 
+  numérique, int, double, …).
+  * Un filtre permettant d'intercepter et de modifier les caractères saisis par l'utilisateur pendant l'édition du 
+  texte (n'accepter que les chiffres par ex.).
+
+Le formateur peut définir un filtre ou un convertisseur ou les deux. Le filtre et le convertisseur sont transmis dans le constructeur du formateur qui possède les surcharges suivantes :
+
+```java
+TextFormatter(StringConverter<V> valueConverter)
+TextFormatter(StringConverter<V> valueConverter, V defaultValue)
+TextFormatter(UnaryOperator<TextFormatter.Change> filter)
+TextFormatter(StringConverter<V> valueConverter, V defaultValue,
+UnaryOperator<TextFormatter.Change> filter)
+```
+Le paramètre générique `V` du formateur (`TextFormatter<V>`) définit le type de la propriété value. On ne peut utiliser 
+cette propriété que si l'on a défini un convertisseur dans le formateur.
+
+Le convertisseur est un objet de type `StringConverter<V>` qui doit implémenter les méthodes de conversions entre les 
+propriétés `text` (String) et `value` (V) :
+  * `fromString()` : `text` -> `value`
+  
+  * `toString()` : `value` -> `text`
+
+Il existe des implémentations prédéfinies de convertisseurs pour certains types courants :
+
+  * `BooleanStringConverter`, `DoubleStringConverter`, `IntegerStringConverter`, `NumberStringConverter`, `DateTimeStringConverter`, ...
+
+Si l'on souhaite gérer le format d'affichage et/ou traiter certaines erreurs, il est préférable de redéfinir les méthodes de conversion.
+
+Le filtre que l'on peut greffer à un formateur est un objet de type `UnaryOperator<TextFormatter.Change>` :
+  * `UnaryOperator<T>` : interface fonctionnelle avec la méthode abstraite `Change apply(Change c)`
+
+  * `Change` : classe interne de `TextFormatter` représentant l'état des changements effectués
+
+La classe contient de nombreuses méthodes permettant de réagir aux changements effectués dans le texte lors de
+  
+  * L'ajout de texte (`isAdded()`)
+  
+  * Le remplacement de texte (`isReplaced()`)
+  
+  * La suppression de texte (`isDeleted()`)
+  
+Les opérations disponibles sont des opérations de bas niveau qui permettent d'intervenir lors de la frappe des caractères 
+dans le champ mais qui nécessitent plus de travail pour créer des filtres plus complexes (adresse e-mail ou numéro de 
+téléphone valide, etc.). Pour comprendre le fonctionnnement de ce mécanisme, vous pouvez étudier et modifier la 
+méthode `addTextField()` pour que les valeurs du champ de texte soit toujours compatible avec les valeurs du slider.
 
 #### Exercice 7
 
