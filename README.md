@@ -17,7 +17,7 @@ graphiques modernes (aussi bien que des jeux 3D !). JavaFX 8.0 est tellement ric
 [documentation](https://docs.oracle.com/javase/8/javafx/api/toc.htm) se trouve à part de celle de 
 [Java 8](https://docs.oracle.com/javase/8/docs/api/index.html?overview-summary.html) (qui inclut celle de ses prédécesseurs AWT et Swing), bien qu'il fasse partie intégrante de Java 8.
 
-Ce TP explore les mécanismes clefs de JavaFX 8.0 : Les propriétés, les bindings et le FXML.
+Ce TP explore les mécanismes clefs de JavaFX 8.0 : Les propriétés, les bindings.
 
 #### Création de votre fork du TP
 
