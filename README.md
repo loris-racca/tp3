@@ -336,7 +336,7 @@ automatiquement à chaque fois que nécessaire.
 
 #### Exercice 6
 
-Si la liaison doit se faire dans les deux sens on parle de Binding bidirectionnel. Une liaison bidirectionnelle s'effectue 
+Si la liaison doit se faire dans les deux sens on parle de Binding **bidirectionnel**. Une liaison bidirectionnelle s'effectue 
 de manière similaire, mais en utilisant la méthode `bindBidirectional()`. Une propriété ne peut être liée (asservie) 
 qu'à une seule autre si le lien est unidirectionnel (`bind()`). Par contre, les liens bidirectionnels (`bindBidirectional()`) 
 peuvent être multiples.
@@ -357,7 +357,7 @@ respectant les consignes suivantes :
 - Le rayon du cercle doit être synchronisé avec la valeur du slider.
 
 - Le texte du `textField` doit aussi être synchronisé avec le rayon du cercle. Le type des deux propriétés étant 
-différent, une conversion doit être effectuée en passant un objet `NumberStringConverter` comme troisième paramettre de 
+différent, une conversion doit être effectuée en passant un objet `NumberStringConverter` comme troisième paramètre de 
 la méthode statique `Bindings.bindBidirectional()`.
 
 - Le rayon doit être initialisé à 150.
