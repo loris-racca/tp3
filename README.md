@@ -249,8 +249,8 @@ binding (`DoubleBinding`, `BooleanBinding`, `StringBinding`, …).
 
 #### Exercice 4
 Comme on vient de le voir, les bindings permettent de lier des propriétés entre elles avec des relations plus ou moins 
-complexes. Ces liens peuvent comme on vient de le voir pertinent pour propager des calculs entre propriétés d'un même 
-objet mais ce n'est pas leur intérêt majeur. 
+complexes, et peuvent s'avérer pertinents pour propager des calculs entre propriétés d'un même 
+objet. Mais ce n'est pas leur intérêt majeur. 
 
 En effet, c'est quand l'on commence à lier des propriétés venant d'objets différents que ce mécanisme donne tout son 
 potentiel. Tout d'abord par sa simplicité de mise en œuvre et surtout par le fait que ces liens peuvent être définis 
@@ -258,8 +258,8 @@ depuis l’extérieur des classes liées. Cela offre donc une grande facilité d
 faible entre les classes.
 
 Dans cet exercice, nous allons montrer comment nous allons lier notre calculateur d'aire d'un triangle à des composants 
-graphiques. Chaque coordonnée des trois sommets du triangles sera contrôlée par un objet `Slider`. Pour ce faire 
-nous asservirons la coordonnée à la propriété `value` du slider. Un champ de texte sera soumis à la propriété `area` de 
+graphiques. Chaque coordonnée des trois sommets du triangle sera contrôlée par un objet `Slider`. Pour ce faire 
+nous asservirons chaque coordonnée à la propriété `value` du slider associé. Un champ de texte sera soumis à la propriété `area` de 
 l'objet `triangleArea`.
 
 Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
@@ -269,8 +269,8 @@ Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
 La racine de notre graphe de scène sera un objet de la classe `GridPane`. Le conteneur `GridPane` permet de disposer les 
 composants enfants dans une grille flexible (arrangement en lignes et en colonnes), un peu à la manière d'une table HTML.
 
-La grille peut être irrégulière, la hauteur des lignes et la largeur des colonnes de la grille ne sont pas nécessairement 
-uniformes. La zone occupée par un composant peut s'étendre (span) sur plusieurs lignes et/ou sur plusieurs colonnes.
+La grille peut être irrégulière, la hauteur de ses lignes et la largeur de ses colonnes ne sont pas nécessairement 
+uniformes. La zone occupée par un composant peut s'étendre (*span*) sur plusieurs lignes et/ou sur plusieurs colonnes.
 
 Le nombre de lignes et de colonnes de la grille est déterminé automatiquement par les endroits où sont placés les composants.
 Par défaut, la hauteur (respectivement la largeur) de chaque ligne (resp. colonne) est déterminée par la hauteur 
@@ -280,11 +280,10 @@ Dans le Paquetage `exercice4`, ouvrir la classe `TriangleAreaCalculator` et l'im
 suivantes :
 
 - Écrire la méthode `configSlider()` qui prend un objet `Slider` en paramètre et le personnalise. Le slider doit avoir
-des valeurs allant de 0 à 10. Les marques de d'unité et leurs labels doivent être affichés. Il devra y avoir 5 marques 
-de graduation. L'incrément sera de 1 pour conserver des coordonnées entières.
+des valeurs allant de 0 à 10, avec 0 comme valeur de départ. Les marques d'unité et leurs labels doivent être affichés. Les graduations du slider sont visuellement marquées par de petits traits pour les pas mineurs, et par des traits plus grands pour les pas majeurs (dont la valeur est affichée). Faites en sorte que le slider ne permette que de choisir une valeur entière (en l'alignant sur les marques des pas).
 
 - Écrire la méthode `configGridPane()` qui personnalise l'objet `GridPane` qui sera utilisé comme racine du graphe de 
-scène. Le pading doit être initialisé à la valeur 10 dans les quatre directions. L'espacement vertical et horizontal 
+scène. Le *padding* doit être initialisé à la valeur 10 dans les quatre directions. L'espacement vertical et horizontal entre les cellules de la grille 
 sera aussi configuré à la même valeur. La première colonne doit être contrainte `ColumnConstraint` avec une taille 
 préférée de 50 et une taille minimale de 50. La seconde colonne aura une contrainte qui spécifiera que  
 sa largeur s'adaptera à la largeur restante de la scène.
