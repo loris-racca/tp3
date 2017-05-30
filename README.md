@@ -284,18 +284,20 @@ des valeurs allant de 0 à 10, avec 0 comme valeur de départ. Les marques d'uni
 
 - Écrire la méthode `configGridPane()` qui personnalise l'objet `GridPane` qui sera utilisé comme racine du graphe de 
 scène. Le *padding* doit être initialisé à la valeur 10 dans les quatre directions. L'espacement vertical et horizontal entre les cellules de la grille 
-sera aussi configuré à la même valeur. La première colonne doit être contrainte `ColumnConstraint` avec une taille 
+sera aussi configuré à la même valeur. La première colonne doit être contrainte avec une taille 
 préférée de 50 et une taille minimale de 50. La seconde colonne aura une contrainte qui spécifiera que  
-sa largeur s'adaptera à la largeur restante de la scène.
+sa largeur s'adaptera à la largeur restante de la scène. Ces contraintes s'expriment par des objets `ColumnConstraints` qu'il faut ajouter aux contraintes du `GridPane`
 
 - Écrire la méthode `addSliders()` qui ajoute tous les sliders dans la bonne ligne de la grille. Chaque slider aura un 
 label qui permettra à l'utilisateur de savoir sur quelle propriété il agit. Il faudra donc rajouter les labels dans la 
 première colonne.
+
+- Écrire la méthode `addPointLabels()` qui ajoute les labels des points (*P1*, *P2*, *P3*) au dessus des 2 sliders réglant les coordonnées du point correspondant.
  
 - Écrire la méthode `addArea()` qui ajoutera le champ de texte et son label pour afficher la valeur de l'aire.
 
-- Écrire la méthode `createBinding()` qui soumet chaque coordonnées au slider associé. Le champ de texte d'affichage 
-de l'aire sera soumis à la valeur de la propriété `area` de la donnée membre `triangleArea`.
+- Écrire la méthode `createBinding()` qui soumet chaque propriété représentant une coordonnée dans la donnée membre `triangleArea` au slider associé. Le champ de texte d'affichage 
+de l'aire sera soumis à la valeur de la propriété `area` de `triangleArea`.
 
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
 solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
