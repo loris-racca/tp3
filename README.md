@@ -456,16 +456,19 @@ jeu sera donc lente pour permettre d'avoir le temps de réagir.
 
 Notre application finale devrait devrait ressembler à :
 
-![](src/main/resources/assets/Pong.png)
+![](src/main/resources/assets/pong.png)
 
-La première classe que nous allons implémenter est la classe `Paddle`. Cette classe étend la classe `Rectangle` à 
-laquelle on ajoute des propriétés pour interagir plus facilement à la souris. La première `paddleY`, du 
-type `DoubleProperty`, mémorise la position verticale de la raquette.
- 
-La propriété `initPaddleTranslateY` mémorise la position verticale de la raquette au moment où l'on presse sur le bouton 
-de la souris pour déplacer la raquette. La propriété `paddleDragAnchorY` mémorise la position de la souris par rapport 
-au coin de la scène. Ces deux propriétés permettent à l'utilisateur de conserver le même décalage sur la raquette pendant 
+La première classe que nous allons implémenter est la classe `Paddle`. Cette classe **étend** la classe `Rectangle` à 
+laquelle on ajoute une propriété et des données membres pour interagir plus facilement à la souris. 
+
+Sa propriété `paddleY`, du 
+type `DoubleProperty`, mémorise la position verticale de la raquette. 
+Sa donnée membre `initPaddleTranslateY` mémorise la position verticale de la raquette au moment où l'on presse sur le bouton 
+de la souris pour déplacer la raquette. Sa donnée membre `paddleDragAnchorY` mémorise la position de la souris par rapport 
+au coin de la scène. Ces deux données membres permettent à l'utilisateur de conserver le même décalage sur la raquette pendant 
 tout le déplacement.
+
+Plutôt que de modifier directement les coordonnées de la raquette lorsque l'utilisateur la drag-and-drop, nous utiliserons la propriété `translateY` que tout noeud (`Node`) possède.
 
 Dans le Paquetage `exercice8`, ouvrir la classe `Paddle` et l'implémenter en respectant les consignes suivantes :
 
@@ -473,12 +476,13 @@ Dans le Paquetage `exercice8`, ouvrir la classe `Paddle` et l'implémenter en re
 couleur de remplissage en bleu. Changer le curseur pour qu'une main fermée apparaisse quand on survole la raquette.
  
 - Ajouteur un écouteur d'évenement sur la propriété `OnMousePressed`. Cet écouteur doit mettre à jour les données membres 
-`initPaddleTranslateY` et `paddleDragAnchorY` avec, respectivement, la translation courante en Y du paddle, et la position en Y du clic.
+`initPaddleTranslateY` et `paddleDragAnchorY` avec, respectivement, la translation courante en Y du paddle, et la position en Y du clic. Ces informations sont utiles pour calculer le déplacement de la raquette que l'utilisateur souhaite effectuer quand il la drag-and-drop, puisque le drag-and-drop débute forcément par un clic sur la raquette.
 
 - Ajouter un écouteur d'événement sur la propriété `OnMouseDragged` qui modifie la valeur de la propriété `paddleY` 
-en fonction de la position courante de la souris en prenant en compte la position initiale de la main sur la raquette.
+en fonction de la position courante de la souris, de la position initiale de la main sur la raquette et de la translation en Y de la raquette qui ont été mémorisées lors du clic.
 
-- Soumettre la propriété `translateY` à la valeur de `paddleY` pour déplacer correctement le rectangle de la raquette 
+- Soumettre la propriété `translateY` de la raquette 
+à la valeur de `paddleY` pour déplacer correctement le rectangle de la raquette 
 pendant que l'utilisateur la drag-and-drop.
 
 Ouvrir maintenant la classe `Ball` et l'implémenter en respectant les consignes suivantes :
