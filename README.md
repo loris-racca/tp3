@@ -454,27 +454,31 @@ Maintenant que nous disposons d'une balle rebondissante *à la pong*, nous allon
 de la difficulté de jeu, notre pong se jouera à un seul joueur qui actionnera les raquettes à la souris. La vitesse de 
 jeu sera donc lente pour permettre d'avoir le temps de réagir.
 
-La première classe que nous allons implémenter est la classe `Paddle`. Cette classe étends la classe `Rectangle` à 
+Notre application finale devrait devrait ressembler à :
+
+![](src/main/resources/assets/Pong.png)
+
+La première classe que nous allons implémenter est la classe `Paddle`. Cette classe étend la classe `Rectangle` à 
 laquelle on ajoute des propriétés pour interagir plus facilement à la souris. La première `paddleY`, du 
 type `DoubleProperty`, mémorise la position verticale de la raquette.
  
 La propriété `initPaddleTranslateY` mémorise la position verticale de la raquette au moment où l'on presse sur le bouton 
-de la souris pour déplacer la raquette. La propriété `paddleDragAnchorY` mémorise la position du de la souris par rapport 
+de la souris pour déplacer la raquette. La propriété `paddleDragAnchorY` mémorise la position de la souris par rapport 
 au coin de la scène. Ces deux propriétés permettent à l'utilisateur de conserver le même décalage sur la raquette pendant 
 tout le déplacement.
 
 Dans le Paquetage `exercice8`, ouvrir la classe `Paddle` et l'implémenter en respectant les consignes suivantes :
 
 - Dans le constructeur, configurer la raquette pour être un rectangle de 20 de largeur et de 50 de hauteur. Changer la 
-couleur de remplissage en bleu. Changer le curseur pour qu'une main fermée apparaisse quand on survol la raquette.
+couleur de remplissage en bleu. Changer le curseur pour qu'une main fermée apparaisse quand on survole la raquette.
  
-- Ajouteur un écouteur d'évenement sur la propriété `OnMousePressed`. Cet gestionaire doit valoriser la propriété 
-`initPaddleTranslateY` et `paddleDragAnchorY`.
+- Ajouteur un écouteur d'évenement sur la propriété `OnMousePressed`. Cet écouteur doit mettre à jour les données membres 
+`initPaddleTranslateY` et `paddleDragAnchorY` avec, respectivement, la translation courante en Y du paddle, et la position en Y du clic.
 
 - Ajouter un écouteur d'événement sur la propriété `OnMouseDragged` qui modifie la valeur de la propriété `paddleY` 
 en fonction de la position courante de la souris en prenant en compte la position initiale de la main sur la raquette.
 
-- Soumettre la propriété `translateY` au valeurs de `paddleY` pour déplacer correctement le rectangle de la raquette 
+- Soumettre la propriété `translateY` à la valeur de `paddleY` pour déplacer correctement le rectangle de la raquette 
 pendant que l'utilisateur la drag-and-drop.
 
 Ouvrir maintenant la classe `Ball` et l'implémenter en respectant les consignes suivantes :
@@ -483,30 +487,30 @@ Ouvrir maintenant la classe `Ball` et l'implémenter en respectant les consignes
 à 10 et remplir avec du violet. Initialiser les propriétés avec des valeurs adaptées du vecteur vitesse.
 
 - Écrire la méthode `collided` qui vérifie si la forme passée en argument touche la balle. Pour réaliser cette action, 
-vous pouvez utiliser l'une des méthodes `intersect()` de la classe `Shape`. 
+vous pouvez utiliser l'une des méthodes `intersects()` que la classe `Shape` hérite de `Node`.   
 
 Ouvrir maintenant la classe `SlowPong`  et l'implémenter en respectant les consignes suivantes :
-- Écrire la méthode `configureStage()` qui s'occupe de créer la scène, la dimensionne à 500 par 500, associe à l'objet 
+- Écrire la méthode `configureStage()` qui s'occupe de créer la scène, la dimensionne à 500 par 500, l'intègre dans l'objet 
 `stage` et personnalise le titre.
 
 - Écrire la méthode `createPongPane()` qui va créer un objet `Pane` y placer les deux raquettes, la balle et le boutton *start*.
 
 - Écrire la méthode `createStartButton` qui va créer un objet `Button` avec le texte "Start!". Rajouter un écouteur pour 
-que lorsque le bouton est actionné, l'animation soit lancée. Asservir la propriété `visible` à la propriété `startVisible. 
+que lorsque le bouton est actionné, l'animation soit lancée. Asservir sa propriété `visible` à la propriété `startVisible` de notre application.
 
 - Écrire la méthode `createBindings()` qui initialise les expressions booléennes `isBouncingOffVerticalWall` et 
-`isBouncingOffHorizontalWall`. Asservir la position en X de la raquette droite pour quelle soit toujours aussi proche du 
+`isBouncingOffHorizontalWall`. Asservir la position en X de la raquette droite pour qu'elle soit toujours aussi proche du 
 bord même quand la fenêtre est agrandie. Asservir de même la position du bouton start pour qu'il soit toujours en bas et 
 au milieu de la zone de jeu.
  
 - Écrire les méthodes `isBouncingOffPaddles()`, `isBouncingOffLeftPaddle()`, `isBouncingOffRightPaddle()`, 
-`isBouncingOffVerticalWall()` et `isBouncingOffHorizontalWall()` qui retourne un booléen qui indique la situation de 
+`isBouncingOffVerticalWall()` et `isBouncingOffHorizontalWall()` qui retournent un booléen qui indique la situation de 
 rebond dans laquelle se trouve la balle.
   
 - Écrire la méthodes `checkBouncing()` qui utilise les méthodes précédentes pour implémenter la logique de jeu. Si la 
-balle frappe contre une raquette elle rebondie horizontallement, si elle tape un mur horizontal, c'est un changement en 
+balle frappe contre une raquette elle rebondit horizontallement, si elle tape un mur horizontal, c'est un changement en 
 Y qui sera effectué et si elle frappe un mur vertical, la partie recommence.
 
-- Écrire la méthodes `moveBall()` qui recalcule les coordonnées de la balle en fonction de la vitesse et du temps écoulé.
+- Écrire la méthode `moveBall()` qui recalcule les coordonnées de la balle en fonction de la vitesse et du temps écoulé.
 
-- Écrire la méthodes `startNewGame` qui stoppe l'animation et replace la balle au centre.
+- Écrire la méthodes `startNewGame()` qui stoppe l'animation et replace la balle au centre.
