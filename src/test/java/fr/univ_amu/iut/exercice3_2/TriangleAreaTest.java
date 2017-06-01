@@ -63,6 +63,6 @@ public class TriangleAreaTest {
         triangleArea.setP3(4, 3);
         triangleArea.printResult();
 
-        verify(out).println("For P1(0,0), P2(6,0), P3(4,3), the area of triangle ABC is 9,0");
+        verify(out).println("For P1(0,0), P2(6,0), P3(4,3), the area of triangle ABC is 9.0");
     }
 }
