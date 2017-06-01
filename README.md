@@ -282,6 +282,8 @@ suivantes :
 - Écrire la méthode `configSlider()` qui prend un objet `Slider` en paramètre et le personnalise. Le slider doit avoir
 des valeurs allant de 0 à 10, avec 0 comme valeur de départ. Les marques d'unité et leurs labels doivent être affichés. Les graduations du slider sont visuellement marquées par de petits traits pour les pas mineurs, et par des traits plus grands pour les pas majeurs (dont la valeur est affichée). Faites en sorte que le slider ne permette que de choisir une valeur entière (en l'alignant sur les marques des pas).
 
+- Écrire la méthode `configSliders()` qui utilise `configSlider()` pour configurer tous les sliders de la classe.
+
 - Écrire la méthode `configGridPane()` qui personnalise l'objet `GridPane` qui sera utilisé comme racine du graphe de 
 scène. Le *padding* doit être initialisé à la valeur 10 dans les quatre directions. L'espacement vertical et horizontal entre les cellules de la grille 
 sera aussi configuré à la même valeur. La première colonne doit être contrainte avec une taille 
@@ -323,11 +325,11 @@ suivantes :
 
 - La classe `TriangleAreaCalculatorAndDrawer` doit respecter les mêmes contraintes que la classe `TriangleAreaCalculator`.
 
-- La méthode `addDrawPane()` doit configurer la données membre `drawPane` pour qu'elle ait une taille de 500 par 500. 
+- La méthode `addDrawPane()` doit configurer la données membre `drawPane` pour qu'elle ait une taille de 500 par 500. L'échelle sera donc de 50/1.
 Son arrière plan sera de couleur gris clair. Les trois côtés du triangles sont à ajouter à ce panneau. Ce panneau devra occuper toutes les colonnes de la dernière ligne du `GridPane`.
 
 - Le méthode `createBinding()` qui doit, en plus des bindings de l'exercice précédent, rajouter les liens entre les coordonnées du triangle 
-et les coordonnées des 3 segments `p1p2`, `p2p3` et `p3p1`.
+et les coordonnées des 3 segments `p1p2`, `p2p3` et `p3p1`. Ne pas oublier de respecter l'échelle dans le calcul des propriétés.
 
 Comme pour les exercices précédents, vous devez activer les tests les uns après les autres et soumettre votre 
 solution après chaque itération du cycle principal du workflow. Une fois vos tests validés, prenez du temps pour 
@@ -349,18 +351,21 @@ Votre fenêtre principale devrait ressembler à cela à la fin de l'exercice :
 
 ![](src/main/resources/assets/cercle.png)
 
-Dans le Paquetage `exercice6`, ouvrir la classe `BidiBindingCircle` et implémenter la méthode `createBindings()` en 
-respectant les consignes suivantes :
+Dans le Paquetage `exercice6`, ouvrir la classe `BidiBindingCircle` puis :
 
-- Les coordonnées du centre du cercle doivent être liées au centre du panneau `pane`.
+- Implémenter la méthode `createBindings()` en respectant les consignes suivantes :
+
+  - Les coordonnées du centre du cercle doivent être liées au centre du panneau `pane`.
   
-- Le rayon du cercle doit être synchronisé avec la valeur du slider.
+  - Le rayon du cercle doit être synchronisé avec la valeur du slider.
+  
+  - Le rayon doit être initialisé à 150.
 
-- Le rayon doit être initialisé à 150.
-
-- Le texte du `textField` doit aussi être synchronisé avec le rayon du cercle. Le type des deux propriétés étant 
+  - Le texte du `textField` doit aussi être synchronisé avec le rayon du cercle. Le type des deux propriétés étant 
 différent, une conversion doit être effectuée en passant un objet `NumberStringConverter` comme troisième paramètre de 
 la méthode statique `Bindings.bindBidirectional()`.
+
+- Implémenter `addSlider()` pour placer le slider en haut de la fenêtre. Le slider autorise les valeurs de 0 à 250.
 
 #### Quelques précisions sur la méthode addTextField()
 
