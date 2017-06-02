@@ -21,7 +21,7 @@ public class PropertyExampleTest {
         System.setOut(out);
     }
 
-    @Ignore
+
     @Test
     public void createProperty() throws Exception {
         propertyExample.createProperty();
@@ -32,7 +32,6 @@ public class PropertyExampleTest {
         verify(out).println("anIntProperty.getValue() = 1024");
     }
 
-    @Ignore
     @Test
     public void addAndRemoveInvalidationListener() throws Exception {
         PropertyExample propertyExample = new PropertyExample();
@@ -50,7 +49,7 @@ public class PropertyExampleTest {
         verify(out).println("set() with 1024.");
     }
 
-    @Ignore
+
     @Test
     public void addAndRemoveChangeListener() throws Exception {
 
