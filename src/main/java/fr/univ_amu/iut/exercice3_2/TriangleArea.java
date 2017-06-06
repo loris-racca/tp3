@@ -1,6 +1,8 @@
 package fr.univ_amu.iut.exercice3_2;
 
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.binding.StringExpression;
 import javafx.beans.property.IntegerProperty;
@@ -62,11 +64,32 @@ public class TriangleArea {
         return area.getValue().doubleValue();
     }
 
+
     void printResult() {
-        throw new RuntimeException("Not yet implemented !");
+        System.out.println(output.getValue());
+
     }
 
     private void createBinding() {
-        throw new RuntimeException("Not yet implemented !");
+        area = new DoubleBinding(){
+            {
+                super.bind(x1,y1,x2,y2,x3,y3);
+            }
+
+            @Override
+
+            protected double computeValue() {
+                // x1*y2 - x1*y3 + x2*y3 - x2*y1 + x3*y1 - x3*y2
+
+                return (x1.get() * y2.get() - x1.get() * y3.get()
+                        + x2.get() * y3.get() - x2.get() * y1.get()
+                        + x3.get() * y1.get() - x3.get() * y2.get()) / 2.0d;
+            }
+        };
+
+        output = Bindings.format(
+                "For P1(%d,%d), P2(%d,%d), P3(%d,%d), the area of triangle ABC is %3.1f",
+                x1, y1, x2, y2, x3, y3, area);
+
     }
 }
