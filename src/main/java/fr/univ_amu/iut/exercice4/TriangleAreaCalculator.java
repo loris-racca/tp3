@@ -2,6 +2,7 @@ package fr.univ_amu.iut.exercice4;
 
 import fr.univ_amu.iut.exercice3.TriangleArea;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -56,11 +57,32 @@ public class TriangleAreaCalculator extends Application {
     }
 
     private void configSliders() {
-        throw new RuntimeException("Not yet implemented !");
-    }
+        root.add(x1Slider,1,1);
+        configSlider(x1Slider);
+
+        root.add(x2Slider,1,2);
+        configSlider(x2Slider);
+
+        root.add(x3Slider,1,3);
+        configSlider(x3Slider);
+
+        root.add(y1Slider,1,4);
+        configSlider(y1Slider);
+
+        root.add(y2Slider,1,5);
+        configSlider(y2Slider);
+
+        root.add(y3Slider,1,6);
+        configSlider(y3Slider);
+
+      }
 
     private void configGridPane() {
-        throw new RuntimeException("Not yet implemented !");
+        root.setPadding(new Insets(10,10,10,10));
+        root.setHgap(10);
+        root.setVgap(10);
+        root.getColumnConstraints().addAll()
+                = new
 
     }
 
