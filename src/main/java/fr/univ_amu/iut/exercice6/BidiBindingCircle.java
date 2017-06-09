@@ -10,10 +10,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 public class BidiBindingCircle extends Application {
 
-    private Circle c = new Circle();
+    private Circle c = new Circle(150);
     private Slider slider = new Slider();
     private TextField textField = new TextField();
 
@@ -43,7 +44,10 @@ public class BidiBindingCircle extends Application {
     }
 
     private void createBindings() {
-        throw new RuntimeException("Not yet implemented !");
+        slider.valueProperty().bindBidirectional(c.radiusProperty());
+        textField.textProperty().bindBidirectional(slider.valueProperty(), new NumberStringConverter());
+        c.centerXProperty().bind(pane.widthProperty().divide(2));
+        c.centerYProperty().bind(pane.heightProperty().divide(2));
     }
 
     private void configStage(Stage stage) {
@@ -54,7 +58,7 @@ public class BidiBindingCircle extends Application {
     }
 
     private void addSlider() {
-        throw new RuntimeException("Not yet implemented !");
+        root.setTop(slider);
     }
 
     private void addPane() {
